@@ -16,7 +16,7 @@ class Sprites_g2(object):
         self.update_center()
         
         # Sensing properties
-        self.platform = None
+        self.platform = []  # Initialize platform as an empty list
         self.current_time = None
         
         # Limiting properties
@@ -36,14 +36,16 @@ class Sprites_g2(object):
                 self.vel[1] = -strength
                 self.last_jump_time = self.current_time
     
-    def is_landed(self, sprite1, sprite2):
-        if self.platform is not None:
-            return (
-                sprite1.pos[0] < sprite2.pos[0] + sprite2.size[0] and
-                sprite2.pos[0] < sprite1.pos[0] + sprite1.size[0] and
-                sprite1.pos[1] + sprite1.size[1] <= sprite2.pos[1] + 1 and
-                sprite1.pos[1] + sprite1.size[1] + sprite1.vel[1] > sprite2.pos[1]
-            )
+    def is_landed(self, sprite1, platforms):
+        for platform in platforms:
+            if (
+                sprite1.pos[0] < platform.pos[0] + platform.size[0] and
+                platform.pos[0] < sprite1.pos[0] + sprite1.size[0] and
+                sprite1.pos[1] + sprite1.size[1] <= platform.pos[1] + 1 and
+                sprite1.pos[1] + sprite1.size[1] + sprite1.vel[1] > platform.pos[1]
+            ):
+                return platform  # Return the platform if sprite1 is landed on it
+        return None  # Return None if no platform is landed on
     
     def update_sprite(self, win, current_time):
         self.current_time = current_time
@@ -68,9 +70,10 @@ class Sprites_g2(object):
                     self.pos[1] = self.win_border[1] - self.size[1]
                     self.vel[1] = 0
             
-            # Handle collisions with the platform
-            if self.is_landed(self, self.platform):
-                self.pos[1] = self.platform.pos[1] - self.size[1]
+            # Handle collisions with platforms
+            landed_platform = self.is_landed(self, self.platform)
+            if landed_platform:  # If the sprite has landed on a platform
+                self.pos[1] = landed_platform.pos[1] - self.size[1]
                 self.vel[1] = 0
 
             self.update_center()
@@ -82,7 +85,7 @@ class Sprites_g2(object):
         if keys[pg.K_UP]:
             self.jump(self.jump_power)  # Adjust jump strength if needed
         if keys[pg.K_DOWN]:
-            if not self.is_landed:
+            if not self.is_landed(self, self.platform):
                 self.vel[1] += 1  # Move down
         if keys[pg.K_LEFT]:
             self.vel[0] -= 1  # Move left
