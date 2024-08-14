@@ -13,6 +13,7 @@ class Game(object):
     def set_window(self):
         self.win = self.pyg.display.set_mode(self.win_size)
         self.pyg.display.set_caption(self.title)
+        self.win_center = (int(self.win_size[0] / 2), int(self.win_size[1] / 2))
     class Loop:
         def __init__(self, game):
             self.game = game
