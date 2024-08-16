@@ -8,24 +8,20 @@ class Matrix(object):
         self.color1 = color1
         self.color2 = color2
 
-    def paint_matrix_field(self, center, size, length, text):
+    def paint_matrix_field(self, center, size, length, text, reversed=False):
+        #Creating Instance Variable for Ease
         mat = Matrix(self.game, self.pyg, self.d, self.color1, self.color2)
-        field_width = size * length
-        if len(text) > length:
-            text = text[-length:]
-        total_text_width = size * len(text)
-        start_x = center[0] - (total_text_width / 2)
-        for i, char in enumerate(text):
-                pos_x = start_x + i * size
-                mat.paint_matrix(char, (pos_x, center[1]), size)
-        if len(text) < length:
-                # Number of blanks to add
-                num_blanks = length - len(text)
-                blank_width = num_blanks * size
-                blank_start_x = start_x + len(text) * size
-                for i in range(num_blanks):
-                    pos_x = blank_start_x + i * size
-                    mat.paint_matrix(None, (pos_x, center[1]), size)
+        start_index, end_index = 0, (-length if reversed else length)
+        if length >= len(text):
+            for i in range(length):                                             #To modify(make compatible with reversed)
+                if i <= length - len(text):
+                    mat.paint_matrix(None, (i * center[0], center[1]), size)
+                else:
+                    mat.paint_matrix(text[i], (center[0], center[1]), size)
+        else:                                                                   #partial
+            length = len(text) - length
+            for i in range(length):
+                mat.paint_matrix(text[i], (center[0], center[1]), size)
 
     def paint_matrix(self, val, center, size):
         self.matrix = self.d.Dictionary().matrices()[val]
