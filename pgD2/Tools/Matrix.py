@@ -8,7 +8,7 @@ class Matrix(object):
         self.color1 = color1
         self.color2 = color2
 
-    def paint_matrix_field(self, center, size, text, length=None, mode = 0):
+    def paint_matrix_field(self, center, size, text, length=None, mode = 0):    #To revise
         length = None if not length == None else (len(text))
         mat = Matrix(self.game, self.pyg, self.d, self.color1, self.color2)
         field_width = size * length
