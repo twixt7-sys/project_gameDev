@@ -9,10 +9,9 @@ class Sprites_g2(object):
         self.vel = list(vel)
         self.accel = list(accel)
         self.size = size
-        self.speed = speed  # Use speed as scalar
+        self.speed = speed
         self.color = color
         
-        # Dependent properties
         self.update_center()
         
         # Sensing properties

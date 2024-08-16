@@ -1,0 +1,4 @@
+Classes:
+- Sprites
+- Platforms
+- Actions <-- sub class

@@ -6,7 +6,7 @@ import pygame as pg
 sys.path.append(os.path.abspath('pgD1'))
 
 import tools
-import tools.sprites as s
+import pgD1.tools.sprites_g1 as s
 import tools.Matrices as m
 
 pg.init()
@@ -17,12 +17,16 @@ win = pg.display.set_mode(win_size)
 pg.display.set_caption("Physics")
 win_center = tuple(x / 2 for x in win_size)
 
+#Game properties
+gravity = 5
+
 # Initialize sprite
-s1 = s.Sprite(win_center, (50, 50), 10, (255, 255, 255), 1, s.Sprite.RECT)
+s1 = s.Sprite(win_center, (50, 50), 10, (255, 255, 255), 1, s.Sprite.RECT, (win_size[1] - 100), gravity)
 
 run = True
 while run:
     pg.time.Clock().tick(60)  # Cap the frame rate at 60 FPS
+    current_time = pg.time.get_ticks()
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
