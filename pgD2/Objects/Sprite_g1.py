@@ -16,40 +16,55 @@ class Sprite_g1(object):
         s.en_togs[:] = [False] * len(s.en_togs) #sets all elements to False
         #game environment property senses
         s.en_prop = [g.gravity, g.friction, g.wind, g.collision, g.bounce]
-        s.en_prop_val = [1.0, 0.5, -0.25, 0, 1.0]                                 #initial values
-        for i, val in s.en_prop, s.en_prop_val:                                     #assigning initial values as default properties
+        s.en_prop_val = [1.0, 0.5, -0.25, 0, 1.0]                               #initial values
+        for i, val in s.en_prop, s.en_prop_val:                                 #assigning initial values as default properties
             s.en_prop[i] = val
+
     def actions():
-        def move(keys):
-            return                  #to-do
-        def jump(keys, strength):
-            return                  #to-do
-        def dash(keys, strength):
-            return                  #to-do
-        def oscillate(keys, ):
-            return                  #to-do
-    def update(self):
+        def move(keys):             #to-do
+            return
+        def jump(keys, strength):   #to-do
+            return
+        def dash(keys, strength):   #to-do
+            return
+        def oscillate(keys, ):      #to-do
+            return
+
+    def update(self):               #to-do: 3   to test: 2
         grav, fric, winds, col, bounce = self.en_prop       #senses the environment
-        if self.gravity:
-            self.accel[1] += grav
-            self.vel[1] += self.accel[1]
-        if self.friction:                               #to test
-            if self.dir[0] == -1:                       #left
-                self.accel[0] = fric * self.accel[0]
-                self.vel[0] += fric
-            elif self.dir[0] == 1:                      #right
-                self.accel[0] = fric * self.accel[0]
-                self.vel[0] += fric
-        if self.wind:
-            return                  #to-do
-        if self.collision:
-            return                  #to-do
-        if self.bounce:
-            return                  #to-do
-    def draw_sprite(self):
+        if self.gravity:            #to test
+            Sprite_g1.grav_logic(grav)
+        if self.friction:           #to test
+            Sprite_g1.fric_logic(fric)
+        if self.wind:               #to-do
+            Sprite_g1.
+        if self.collision:          #to-do
+            return
+        if self.bounce:             #to-do
+            return
+        Sprite_g1.draw_sprite()
+
+    def draw_sprite(self):          #to test
         if self.shape == Sprite_g1.RECT:
             pyg.draw.rect(self.game.win, (self.pos[0], self.pos[1], self.size[0], self.size[1]), self.color)
-    def get_direction(self):
-        return                      #to-do: get the net velocity and return a tuple of the direction
-    def is_grounded(self):
-        return                      #to-do: detect if the sprite is on the ground
+    def get_direction(self):        #to-do: get the net velocity and return a tuple of the direction
+        return
+    def is_grounded(self):          #to-do: detect if the sprite is on the ground
+        return
+
+    def grav_logic(self, grav):     #to test
+        self.accel[1] += grav
+        self.vel[1] += self.accel[1]
+    def fric_logic(self, fric):     #to test
+        if self.dir[0] == -1:                       #left
+            self.accel[0] = fric * self.accel[0]
+            self.vel[0] += fric
+        elif self.dir[0] == 1:                      #right
+            self.accel[0] = fric * self.accel[0]
+            self.vel[0] += fric
+    def wind_logic(self, wind):     #to-do
+        return
+    def col_logic(self, col):       #to-do
+        return
+    def bounce_logic(self, bounce): #to-do
+        return

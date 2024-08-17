@@ -12,7 +12,7 @@ import Tools.Matrix as m
 #import Sprite_g1 as s1
 
 #creating a game object
-g1 = g.Game((900, 900), "sim_1", 60, pg)
+g1 = g.Game(pg, (900, 900), "sim_1", 60)
 g1.set_window()
 ins, dic = g1.Loop(g1), d.Dictionary()
 

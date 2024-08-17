@@ -13,7 +13,7 @@ Order of setup:
     - quit
 '''
 class Game(object):
-    def __init__(self, pyg, win_size = (900, 900), title = "Game X", frame_rate = 90):
+    def __init__(self, pyg, win_size = [900, 900], title = "Game X", frame_rate = 90):
         #Pygame Instance
         self.pyg = pyg
         #Parameterized Properties
