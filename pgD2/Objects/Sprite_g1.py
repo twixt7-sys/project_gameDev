@@ -13,8 +13,7 @@ class Sprite_g1(object):
         s.bounding_box = (s.center[0], s.center[1], s.size[0], s.size[1])
         s.direction = (0, 0)
         #environmental toggles
-        s.en_togs = (s.gravity, s.friction, s.wind, s.collision, s.bounce)
-        s.en_togs[:] = [False] * len(s.en_togs) #sets all elements to False
+        s.gravity = s.friction = s.wind = s.collision = s.bounce = False
         #game environment property senses
         s.en_prop = [g.gravity, g.friction, g.wind, g.collision, g.bounce]
         s.en_prop_val = [1.0, 0.5, -0.25, 0, 1.0]                               #initial values

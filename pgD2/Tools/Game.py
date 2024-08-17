@@ -14,8 +14,8 @@ Order of setup:
 '''
 class Game(object):
     def __init__(self, pyg, win_size = (900, 900), title = "Game X", frame_rate = 90):
-        #Pygame Instance
-        self.pyg = pyg
+        s = self                                                #Self Instance
+        self.pyg = pyg                                          #Pygame Instance
         #Parameterized Properties
         self.win_size = win_size
         self.title = title
@@ -24,10 +24,17 @@ class Game(object):
         #Unparameterized Properties
         self.run = True
         self.current_time = None
+        #Environment Properties
+        s.gravity = s.friction = s.wind = s.collision = s.bounce = None
     def set_window(self):
         self.win = self.pyg.display.set_mode(self.win_size)
         self.pyg.display.set_caption(self.title)
         self.win_center = (int(self.win_size[0] / 2), int(self.win_size[1] / 2))
+    def set_environment(self, gravity=1, friction=0.1, collision_margin=0, bounce_energy_loss=0):
+        self.gravity = gravity
+        self.friction = friction
+        self.collision = collision_margin
+        self.bounce = bounce_energy_loss
     class Loop:
         def __init__(self, game):
             self.game = game

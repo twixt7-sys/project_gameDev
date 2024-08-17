@@ -10,16 +10,15 @@ import Tools.Game as g
 import Tools.Dictionary as d
 import Objects.Sprite_g1 as s1
 
-#game object
+#game object and settings
 g1 = g.Game(pg)
 g1.set_window()
 
 #for less coding space
-loop, dic = g1.Loop(), d.Dictionary()
+loop, dic = g1.Loop(g1), d.Dictionary()
 
 #in-game objects
-
-
+main_sprite = s1.Sprite_g1(g1, g1.win_center)
 
 #game loop
 while g1.run:
@@ -27,5 +26,6 @@ while g1.run:
     loop.set_events()
     loop.set_background(dic.color[dic.DARK_GREY])
     #insert methods here
+    main_sprite.update()
     loop.update_display()
 pg.quit()
