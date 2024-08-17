@@ -33,9 +33,13 @@ class Sprite_g1(object):
         if self.gravity:
             self.accel[1] += grav
             self.vel[1] += self.accel[1]
-        if self.friction:
-            if self.dir[0] == -1: #left
-                self.accel[0]
+        if self.friction:                               #to test
+            if self.dir[0] == -1:                       #left
+                self.accel[0] = fric * self.accel[0]
+                self.vel[0] += fric
+            elif self.dir[0] == 1:                      #right
+                self.accel[0] = fric * self.accel[0]
+                self.vel[0] += fric
         if self.wind:
             return                  #to-do
         if self.collision:
@@ -47,3 +51,5 @@ class Sprite_g1(object):
             pyg.draw.rect(self.game.win, (self.pos[0], self.pos[1], self.size[0], self.size[1]), self.color)
     def get_direction(self):
         return                      #to-do: get the net velocity and return a tuple of the direction
+    def is_grounded(self):
+        return                      #to-do: detect if the sprite is on the ground

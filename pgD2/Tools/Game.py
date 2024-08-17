@@ -1,5 +1,19 @@
+'''
+Order of setup:
+    - make game object
+    - set window
+    - create instance variables for game.Loop() & dic.Dictionart()              [Optional]
+    - instantiate in-game objects
+    - game loop: (while game.run:)
+        > set loop
+        > set events
+        > set background
+        > in-loop game methods
+        > update display
+    - quit
+'''
 class Game(object):
-    def __init__(self, win_size, title, frame_rate, pyg):
+    def __init__(self, pyg, win_size = (900, 900), title = "Game X", frame_rate = 90):
         #Pygame Instance
         self.pyg = pyg
         #Parameterized Properties
