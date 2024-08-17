@@ -43,7 +43,7 @@ class Game(object):
             ins = self.game
             ins.pyg.time.Clock().tick(ins.frame_rate)
             ins.current_time = ins.pyg.time.get_ticks()
-        def set_events(self, events):
+        def set_events(self, events=None):
             ins = self.game
             self.events = events
             for event in ins.pyg.event.get():
