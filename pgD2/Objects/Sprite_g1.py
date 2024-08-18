@@ -4,7 +4,7 @@ pyg.init()
 class Sprite_g1(object):
     RECT, CIRC = 0, 1
 
-    def __init__(self, game, center, size=[10,10], speed=0.1, vel=[0,0], accel=[0,0], shape=RECT, color=(255,255,255)):
+    def __init__(self, game, center, size=[10,10], speed=0.8, vel=[0,0], accel=[0,0], shape=RECT, color=(255,255,255)):
         #initializing parameter-based properties
         s, g = self, game
         s.game, s.center, s.size, s.speed, s.vel, s.accel, s.shape, s.color = game, center, size, speed, vel, accel, shape, color
@@ -20,55 +20,61 @@ class Sprite_g1(object):
         #object detection
         s.platforms = []
 
-    class Actions():                                                          #to-do: 3   |   to test: 1
-        def __init__(self, sprite):
-            self.sprite = sprite
-        def move(self, keys):                  #to-test
-            pressed = pyg.key.get_pressed()
-            s = self.sprite
-            if pressed[keys[0]]:     #up
-                s.accel[1] -= s.speed
-            if pressed[keys[1]]:     #down
-                s.accel[1] += s.speed
-            if pressed[keys[2]]:     #left
-                s.accel[0] -= s.speed
-            if pressed[keys[3]]:     #right
-                s.accel[0] += s.speed
-        def jump(keys, strength):   #to-do
-            return
-        def dash(keys, strength):   #to-do
-            return
-        def oscillate(keys, ):      #to-do
-            return
-
-    def update_sprite(self):                                                           #to-do: 3   |   to test: 2
-        Sprite_g1.update_position(self)
+    def update_sprite(self):
         Sprite_g1.environment_response(self)
+        Sprite_g1.collide_with_border(self)
+        Sprite_g1.update_position(self)
         Sprite_g1.draw_sprite(self)
 
-    # update sub-methods    
+    # update sub-methods
     def update_position(self):
         self.vel[0] += self.accel[0]
         self.vel[1] += self.accel[1]
         self.pos[0] += self.vel[0]
         self.pos[1] += self.vel[1]
+
     def sense_environment(self):
         grav, fric, winds, col, bounce = self.en_prop
         Sprite_g1.assess_environment(self, grav, fric, winds, col, bounce)
-        
-    def draw_sprite(self):          #to test
+
+    def draw_sprite(self):
         if self.shape == Sprite_g1.RECT:
             pyg.draw.rect(self.game.win, self.color, (self.pos[0], self.pos[1], self.size[0], self.size[1]))
+
+    # other methods
+    def collide_with_border(self):
+        border = self.game.win_size
+
+        sprite_left_side = self.pos[0]
+        sprite_right_side = self.pos[0] + self.size[0]
+        sprite_top_side = self.pos[1]
+        sprite_bottom_side = self.pos[1] + self.size[1]
+
+        if sprite_top_side <= 0:
+            self.pos[1] = 0
+            self.vel[1] = 0
+        if sprite_bottom_side >= border[1]:
+            self.pos[1] = border[1] - self.size[1]
+            self.vel[1] = 0
+        if sprite_left_side <= 0:
+            self.pos[0] = 0
+            self.vel[0] = 0
+        if sprite_right_side >= border[0]:
+            self.pos[0] = border[0] - self.size[0]
+            self.vel[0] = 0
+
     def interact(self, platforms):  #to test
         self.platforms = platforms
     def get_direction(self):        #to-do: get the net velocity and return a tuple of the direction
         return
     def is_grounded(self):          #to-do: detect if the sprite is on the ground
         return
+    def is_collided(self, sprite, objects):
+        return
 
-    def environment_response(self):               #to-do: 0   |   to test: 5
+    def environment_response(self):                                             #to-do: 0   |   to test: 4
         g = self.game
-        if self.gravity:            #to test
+        if self.gravity:
             Sprite_g1.grav_logic(self, g.gravity)
         if self.friction:           #to test
             Sprite_g1.fric_logic(self, g.friction)
@@ -79,8 +85,8 @@ class Sprite_g1(object):
         if self.bounce:             #to-test
             Sprite_g1.bounce_logic(self, g.bounce)
 
-    #environment_logics sub-methods                                              to-do: 3   |   to test: 2
-    def grav_logic(self, grav):     #to test
+    #environment_logics sub-methods                                              to-do: 3   |   to test: 1
+    def grav_logic(self, grav):
         self.accel[1] += grav
         self.vel[1] += self.accel[1]
 
@@ -100,4 +106,27 @@ class Sprite_g1(object):
         return
 
     def bounce_logic(self, bounce): #to-do
-        return
+        bounce_efficiency = bounce
+        
+    
+    class Actions():                                                          #to-do: 3   |   to test: 1
+        def __init__(self, sprite):
+            self.sprite = sprite
+        def move(self, keys):                  #to-test
+            pressed = pyg.key.get_pressed()
+            s = self.sprite
+            s.accel = [0, 0]         #Reset acceleration
+            if pressed[keys[0]]:     #up
+                s.accel[1] -= s.speed
+            if pressed[keys[1]]:     #down
+                s.accel[1] += s.speed
+            if pressed[keys[2]]:     #left
+                s.accel[0] -= s.speed
+            if pressed[keys[3]]:     #right
+                s.accel[0] += s.speed
+        def jump(keys, strength):   #to-do
+            return
+        def dash(keys, strength):   #to-do
+            return
+        def oscillate(keys, ):      #to-do
+            return
