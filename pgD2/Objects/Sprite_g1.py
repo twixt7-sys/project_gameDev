@@ -8,7 +8,7 @@ class Sprite_g1(object):
         s, g = self, game                                                  
         s.game, s.center, s.size, s.vel, s.accel, s.shape, s.color = game, center, size, vel, accel, shape, color
         #parameter-derived properties:
-        s.pos = (s.size[0] - size[0] / 2, s.size[1] - size[1] / 2)
+        s.pos = (s.center[0] - s.size[0] / 2, s.center[1] - s.size[1] / 2)
         s.anchor = (center[0], center[1])
         s.bounding_box = (s.center[0], s.center[1], s.size[0], s.size[1])
         s.direction = (0, 0)

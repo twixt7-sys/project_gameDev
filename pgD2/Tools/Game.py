@@ -29,7 +29,7 @@ class Game(object):
     def set_window(self):
         self.win = self.pyg.display.set_mode(self.win_size)
         self.pyg.display.set_caption(self.title)
-        self.win_center = (int(self.win_size[0] / 2), int(self.win_size[1] / 2))
+        self.win_center = [self.win_size[0] / 2, self.win_size[1] / 2]
     def set_environment(self, gravity=1, friction=0.1, collision_margin=0, bounce_energy_loss=0):
         self.gravity = gravity
         self.friction = friction
