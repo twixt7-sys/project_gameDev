@@ -26,6 +26,7 @@ while g1.run:
     loop.set_events()
     loop.set_background(dic.color[dic.DARK_GREY])
     #insert methods here
+    main_sprite.actions().move((pg.K_UP, pg.K_DOWN, pg.K_LEFT, pg.K_RIGHT))
     main_sprite.update()
     loop.update_display()
 pg.quit()

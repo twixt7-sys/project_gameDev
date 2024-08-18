@@ -3,6 +3,7 @@ pyg.init()
 
 class Sprite_g1(object):
     RECT, CIRC = 0, 1
+
     def __init__(self, game, center, size=(10,10), vel=(0,0), accel=(0,0), shape=RECT, color=(255,255,255)):
         #initializing parameter-based properties
         s, g = self, game                                                  
@@ -19,9 +20,18 @@ class Sprite_g1(object):
         #object detection
         s.platforms = []
 
-    def actions():                                                              #to-do: 4   |   to test: 0
-        def move(keys):             #to-do
-            return
+    def actions(self):                                                          #to-do: 3   |   to test: 1
+        def move(self, keys, mode=0):                  #to-test
+            pressed = pyg.key.get_pressed()
+            var1, var2 = self.accel, self.vel if mode == 0 else (self.vel, self.pos)
+            if pressed[keys[0]]:     #up
+                var1[1] -= var2[1]
+            if pressed[keys[0]]:     #down
+                var1[1] += var2[1]
+            if pressed[keys[0]]:     #left
+                var1[0] -= var2[0]
+            if pressed[keys[0]]:     #right
+                var1[0] += var2[0]
         def jump(keys, strength):   #to-do
             return
         def dash(keys, strength):   #to-do
