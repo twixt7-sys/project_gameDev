@@ -13,10 +13,12 @@ class Sprite_g1(object):
         s.anchor = [center[0], center[1]]
         s.bounding_box = [s.center[0], s.center[1], s.size[0], s.size[1]]
         s.direction = [0, 0]
+        
         #environmental toggles
         s.gravity = s.friction = s.wind = s.collision = s.bounce = False
         #game environment property senses
         s.en_prop = [g.gravity, g.friction, g.wind, g.collision, g.bounce]
+        
         #object detection
         s.platforms = []
 
@@ -52,16 +54,16 @@ class Sprite_g1(object):
 
         if sprite_top_side <= 0:
             self.pos[1] = 0
-            self.vel[1] = 0
+            self.vel[1] *= -1
         if sprite_bottom_side >= border[1]:
             self.pos[1] = border[1] - self.size[1]
-            self.vel[1] = 0
+            self.vel[1] *= 1
         if sprite_left_side <= 0:
             self.pos[0] = 0
-            self.vel[0] = 0
+            self.vel[0] *= -1
         if sprite_right_side >= border[0]:
             self.pos[0] = border[0] - self.size[0]
-            self.vel[0] = 0
+            self.vel[0] *= -1
 
     def interact(self, platforms):  #to test
         self.platforms = platforms
@@ -69,8 +71,34 @@ class Sprite_g1(object):
         return
     def is_grounded(self):          #to-do: detect if the sprite is on the ground
         return
-    def is_collided(self, sprite, objects):
-        return
+    def is_collided(self, sprite, objects=None, margin=0):    #collision logic
+        if objects is not None: #collide with platforms
+            for object in objects:
+                s_vel, s_pos, s_size, o_pos, o_size = sprite.vel, sprite.pos, sprite.size, object.pos, object.size
+                #col_logic(sprite, objects)
+                if (
+                    margin + s_pos[0] < o_pos[0] + o_size[0] and
+                    margin + o_pos[0] < s_pos[0] + s_size[0] and
+                    margin + s_pos[1] + s_size[1] <= o_pos[1] + 1 and
+                    margin + s_pos[1] + s_size[1] + s_vel[1] > o_pos[1]
+                ):
+                    return object
+            return None
+        else: #collide with border
+            win_borderboxes = (
+                (0, -10, self.game.win_size[0], 10),                            #top_windowbox
+                (0, self.game.win_size[1], self.game.win_size[0], 10),          #bottom_windowbox
+                (-10, 0, 10, self.game.win_size[1]),                            #left_windowbox
+                (self.game.win_size[0], 0, 10, self.game.win_size[1]))          #right_windowbox
+            for object in win_borderboxes:
+                if (
+                    margin + sprite.pos[0] < object[0] + object[2] and
+                    margin + object[2] < sprite.pos[0] + sprite.size[0] and
+                    margin + sprite.pos[1] + sprite.size[1] <= object[3] + 1 and
+                    margin + sprite.pos[1] + sprite.size[1] + sprite.vel[1] > object[3]
+                ):
+                    return object
+            return None
 
     def environment_response(self):                                             #to-do: 0   |   to test: 4
         g = self.game
@@ -83,7 +111,7 @@ class Sprite_g1(object):
         if self.collision:          #to-test
             Sprite_g1.col_logic(self, g.collision)
         if self.bounce:             #to-test
-            Sprite_g1.bounce_logic(self, g.bounce)
+            Sprite_g1.bounce_logic(self, g.bounce, self.direction)
 
     #environment_logics sub-methods                                              to-do: 3   |   to test: 1
     def grav_logic(self, grav):
@@ -103,11 +131,19 @@ class Sprite_g1(object):
         self.vel[0] += self.accel[0]
 
     def col_logic(self, col):       #to-do
-        return
+        if self.is_collided(self, None, col): #with window border
+            print("*Sprite collided with border!")
+        if self.is_collided(self, self.platforms, col): #with objects
+            print("*Sprite collided with platform!")
 
-    def bounce_logic(self, bounce): #to-do
+    def bounce_logic(self, bounce, direction): #to-do
         bounce_efficiency = bounce
-        
+        if self.is_collided(self, None): #with window border
+            self.vel[0] *= 1 * bounce_efficiency
+            self.vel[1] *= -1 * bounce_efficiency
+        if self.is_collided(self, self.platforms): #with obje cts
+            self.vel[0] *= 1
+            self.vel[1] *= -1
     
     class Actions():                                                          #to-do: 3   |   to test: 1
         def __init__(self, sprite):
