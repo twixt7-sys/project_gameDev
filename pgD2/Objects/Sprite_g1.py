@@ -41,22 +41,21 @@ class Sprite_g1(object):
         def oscillate(keys, ):      #to-do
             return
 
-    def update(self):                                                           #to-do: 3   |   to test: 2
-        # Apply acceleration to velocity
-        self.vel[0] += self.accel[0]
-        self.vel[1] += self.accel[1]
-        
-        # Apply velocity to position
-        self.pos[0] += self.vel[0]
-        self.pos[1] += self.vel[1]
-        
-        #sense environment
-        grav, fric, winds, col, bounce = self.en_prop
-        Sprite_g1.environment_logics(self, grav, fric, winds, col, bounce)
-        
-        #draw sprite
+    def update_sprite(self):                                                           #to-do: 3   |   to test: 2
+        Sprite_g1.update_position(self)
+        Sprite_g1.environment_response(self)
         Sprite_g1.draw_sprite(self)
 
+    # update sub-methods    
+    def update_position(self):
+        self.vel[0] += self.accel[0]
+        self.vel[1] += self.accel[1]
+        self.pos[0] += self.vel[0]
+        self.pos[1] += self.vel[1]
+    def sense_environment(self):
+        grav, fric, winds, col, bounce = self.en_prop
+        Sprite_g1.assess_environment(self, grav, fric, winds, col, bounce)
+        
     def draw_sprite(self):          #to test
         if self.shape == Sprite_g1.RECT:
             pyg.draw.rect(self.game.win, self.color, (self.pos[0], self.pos[1], self.size[0], self.size[1]))
@@ -67,22 +66,24 @@ class Sprite_g1(object):
     def is_grounded(self):          #to-do: detect if the sprite is on the ground
         return
 
-    def environment_logics(self, grav, fric, winds, col, bounce):               #to-do: 0   |   to test: 5
+    def environment_response(self):               #to-do: 0   |   to test: 5
+        g = self.game
         if self.gravity:            #to test
-            Sprite_g1.grav_logic(grav)
+            Sprite_g1.grav_logic(self, g.gravity)
         if self.friction:           #to test
-            Sprite_g1.fric_logic(fric)
+            Sprite_g1.fric_logic(self, g.friction)
         if self.wind:               #to-test
-            Sprite_g1.wind_logic(winds)
+            Sprite_g1.wind_logic(self, g.winds)
         if self.collision:          #to-test
-            Sprite_g1.col_logic(col)
+            Sprite_g1.col_logic(self, g.collision)
         if self.bounce:             #to-test
-            Sprite_g1.bounce_logic(bounce)
+            Sprite_g1.bounce_logic(self, g.bounce)
 
-    #environment_logics sub-methods                                              to-do: 3   |   to test: 0
+    #environment_logics sub-methods                                              to-do: 3   |   to test: 2
     def grav_logic(self, grav):     #to test
         self.accel[1] += grav
         self.vel[1] += self.accel[1]
+
     def fric_logic(self, fric):     #to test
         if self.dir[0] == -1:                       #left
             self.accel[0] = fric * self.accel[0]
@@ -90,10 +91,13 @@ class Sprite_g1(object):
         elif self.dir[0] == 1:                      #right
             self.accel[0] = fric * self.accel[0]
             self.vel[0] += fric
+
     def wind_logic(self, wind):     #to-do
         self.accel[0] += wind
         self.vel[0] += self.accel[0]
+
     def col_logic(self, col):       #to-do
         return
+
     def bounce_logic(self, bounce): #to-do
         return

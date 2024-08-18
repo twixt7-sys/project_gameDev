@@ -30,9 +30,10 @@ class Game(object):
         self.win = self.pyg.display.set_mode(self.win_size)
         self.pyg.display.set_caption(self.title)
         self.win_center = [self.win_size[0] / 2, self.win_size[1] / 2]
-    def set_environment(self, gravity=1, friction=0.1, collision_margin=0, bounce_energy_loss=0):
+    def set_environment(self, gravity=0.1, friction=0.1, winds=0, collision_margin=0, bounce_energy_loss=0):
         self.gravity = gravity
         self.friction = friction
+        self.winds = winds
         self.collision = collision_margin
         self.bounce = bounce_energy_loss
     class Loop:
