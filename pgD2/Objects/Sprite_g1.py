@@ -144,7 +144,7 @@ class Sprite_g1(object):
         if self.is_collided(self, self.platforms): #with obje cts
             self.vel[0] *= 1
             self.vel[1] *= -1
-    
+
     class Actions():                                                          #to-do: 3   |   to test: 1
         def __init__(self, sprite):
             self.sprite = sprite

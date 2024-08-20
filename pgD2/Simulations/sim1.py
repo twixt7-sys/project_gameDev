@@ -5,10 +5,10 @@ sys.path.append(os.path.abspath('pgD2'))
 
 #importing pygame and project classes
 import pygame as pg
-pg.init()
 import Tools.Game as g
 import Tools.Dictionary as d
 import Tools.Matrix as m
+pg.init()
 #import Sprite_g1 as s1
 
 #creating a game object
