@@ -17,6 +17,9 @@ g1.set_window()
 #setup loop and dictionary instance
 loop, env, dic = l.Loop(g1), e.Environment(g1), d.Dictionary()
 
+#make matrix field
+field1 = m.MatrixField(g1)
+
 #set environment
 env.enable_all()
 
@@ -25,5 +28,6 @@ while g1.run:
     loop.set_loop()
     loop.set_events()
     loop.set_background()
+    field1.draw_matrix_field("Hello World", g1.center)
     loop.update_display()
 g1.quit()
