@@ -1,7 +1,7 @@
 Order of setup:
     - make game object
     - set window
-    - create instance variables for game.Loop() & dic.Dictionary()    [Optional]
+    - instantiate logic and environment
     - instantiate in-game objects
     - game loop: (while game.run:)
         > set loop

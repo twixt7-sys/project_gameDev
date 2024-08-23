@@ -15,6 +15,7 @@ class Game(object):
         self.right =    (self.size[0], 0, 10, self.size[1])
         # environment attribute
         self.environment = None
+        self.logic = None
 
     def set_window(self):
         self.win = self.pyg.display.set_mode(self.size)

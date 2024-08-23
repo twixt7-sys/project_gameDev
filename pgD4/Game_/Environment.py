@@ -1,1 +1,0 @@
-# game object subclass
