@@ -1,4 +1,4 @@
-# sprites are controllable
+# makes entity controllable
 
 class SpriteG3():
     def __init__(self, entity):

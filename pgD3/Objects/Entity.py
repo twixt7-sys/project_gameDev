@@ -6,6 +6,7 @@ class Entity(object):
         self.size = size
         self.center = center
         self.pos = self.center[0] - self.size[0] / 2, self.center[1] - self.size[1] / 2
+        self.rect_val = [self.pos[0], self.pos[1], self.size[0], self.size[1]]
         self.surfaces = []
         # surface values
         ts = self.topside = self.pos[1]
@@ -50,6 +51,7 @@ class Entity(object):
         size = self.size
         center = self.center
         pos = center[0] - size[0] / 2, center[1] - size[1] / 2
+        self.rect_val = [pos[0], pos[1], size[0], size[1]]
         ts = self.topside = pos[1]
         bs = self.botside = pos[1] + size[1]
         ls = self.leftside = pos[0]

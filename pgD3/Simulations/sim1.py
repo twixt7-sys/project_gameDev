@@ -43,9 +43,9 @@ while g1.run:
     velocity.draw_matrix_field("velocity: ", [50, 100], 5)
 
     g_val = str(env.grav_val)
-    v_val = str(chr(e1.velocity[0]))
+    #v_val = str(chr(e1.velocity))
     grav_num.draw_matrix_field(g_val, [350, 50], 5)
-    vel_num.draw_matrix_field(v_val, [350, 50], 5)
+    #vel_num.draw_matrix_field(v_val, [350, 50], 5)
     
     s1.move()
 
