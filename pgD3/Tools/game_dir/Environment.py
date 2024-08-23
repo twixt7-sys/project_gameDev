@@ -1,7 +1,6 @@
 import Tools.game_dir.GameClass as g
 class Environment(g.Game):
-    def __init__(self, game):
-        self.game = game
+    def __init__(self):
         #environmental toggles
         self.gravity = False
         self.wind = False
