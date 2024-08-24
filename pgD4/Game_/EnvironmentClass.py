@@ -8,7 +8,7 @@ class Environment(object):
         #environment values
         self.grav_val = 0.5
         self.wind_val = 0
-        self.wr_val = 0.1
+        self.wr_val = 0.99
         self.dc_val = 60
 
     def enable_all(self):

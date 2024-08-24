@@ -1,4 +1,4 @@
-class G_logics:
+class G_logics(object):
     def __init__(self, game):
         self.game = game
 
@@ -10,21 +10,21 @@ class G_logics:
         wind = self.game.environment.wind
         return velocity_input + wind
     def apply_wind_resistance(self, velocity_input):
-        wind_resistance = self.game.environment.wind_resistance
+        wind_resistance = self.game.environment.wr_val
         return [velocity_input[0] * wind_resistance, velocity_input[1] * wind_resistance]
 
     # internal forces
-    def move(self, velocity_input, movement_speed):
+    def apply_movement(self, velocity_input, movement_speed):
         return velocity_input + movement_speed
     def dash(self,velocity_input, strength):
         return velocity_input + strength
 
     # reaction forces
     def is_collided(self, rect_input1, rect_input2):                            # Axis-Aligned Bounding Box Collision Logic
-        if (rect_input1[0] < rect_input2[0] + rect_input2[3] and
-            rect_input2[0] < rect_input1[0] + rect_input1[3] and
-            rect_input1[1] < rect_input2[1] + rect_input2[4] and
-            rect_input2[1] < rect_input1[1] + rect_input1[4]):
+        if (rect_input1[0] < rect_input2[0] + rect_input2[2] and
+            rect_input2[0] < rect_input1[0] + rect_input1[2] and
+            rect_input1[1] < rect_input2[1] + rect_input2[3] and
+            rect_input2[1] < rect_input1[1] + rect_input1[3]):
             return True
         return False
     def apply_friction(self, velocity_input):
