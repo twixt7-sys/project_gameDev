@@ -25,6 +25,7 @@ class Entity(object):
         self.is_friction_affected = True
         self.is_wind_affected = True
         self.is_wind_resistance_affected = True
+        self.has_trail = True
     
     def update(self):
         Entity.apply_states(self)
@@ -34,8 +35,8 @@ class Entity(object):
     def apply_states(self):
         if self.is_controllable:
             Entity.move(self)
-        if self.is_tangible:
-            if Entity.collide_with_all_rects(self):
+        if self.is_tangible:                                                    #to modify: (remove non-bounce collision) (integrate tangibility with bounce)
+            if self.game.logic.collide_with_all_rects(self):
                 self.center[0] -= self.velocity[0]
                 self.velocity[0] = 0
                 self.center[1] -= self.velocity[1]
@@ -85,12 +86,6 @@ class Entity(object):
         right = keys[self.game.pyg.K_RIGHT]
         movement_keys = [up, down, left, right]
         return movement_keys
-    
-    def collide_with_all_rects(self):
-        for rect in self.game.rects:
-            if self.game.logic.is_collided(self.rect_val, rect):
-                return True
-        return False
     
     def reset_velocity(self):
         self.velocity[0] = 0

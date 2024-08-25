@@ -27,6 +27,11 @@ class G_logics(object):
             rect_input2[1] < rect_input1[1] + rect_input1[3]):
             return True
         return False
+    def collide_with_all_rects(self, rects):
+        for rect in rects:
+            if G_logics.is_collided(self, self.rect_val, rect):
+                return True
+        return False
     def apply_friction(self, velocity_input):
         friction = self.object.fric_val
         return velocity_input * friction
