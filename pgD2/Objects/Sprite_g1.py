@@ -15,7 +15,7 @@ class Sprite_g1(object):
         s.direction = [0, 0]
         
         #environmental toggles
-        s.gravity = s.friction = s.wind = s.collision = s.bounce = False
+        s.gravity = s.friction = s.wind = s.collision = s.bounce = True
         #game environment property senses
         s.en_prop = [g.gravity, g.friction, g.wind, g.collision, g.bounce]
         
@@ -119,12 +119,7 @@ class Sprite_g1(object):
         self.vel[1] += self.accel[1]
 
     def fric_logic(self, fric):     #to test
-        if self.dir[0] == -1:                       #left
-            self.accel[0] = fric * self.accel[0]
-            self.vel[0] += fric
-        elif self.dir[0] == 1:                      #right
-            self.accel[0] = fric * self.accel[0]
-            self.vel[0] += fric
+        return
 
     def wind_logic(self, wind):     #to-do
         self.accel[0] += wind
