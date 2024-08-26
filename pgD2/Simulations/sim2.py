@@ -24,9 +24,9 @@ loop, dic = g1.Loop(g1), d.Dictionary()
 
 #in-game objects
 
-sprites = [None] * 100
+sprites = [None] * 5000
 for x in range(len(sprites)):
-    sprites[x] = s1.Sprite_g1(g1, g1.win_center, (10, 10), 0.1 + (x / 1000), [0, 0], [0, 0], 0, dic.color[dic.DARK_GREY])
+    sprites[x] = s1.Sprite_g1(g1, g1.win_center, (15, 15 ), 0.1 + (x / 10000), [0, 0], [0, 0], 0, dic.color[dic.BLUE])
 
 #game loop
 while g1.run:
