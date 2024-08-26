@@ -1,2 +1,3 @@
-import Entity as ent
-import InitAttributes as init
+import os
+import sys
+sys.path.append(os.path.abspath('Entity_'))

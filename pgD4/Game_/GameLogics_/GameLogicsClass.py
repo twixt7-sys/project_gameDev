@@ -1,4 +1,6 @@
-class G_logics(object):
+class GameLogics(object):
+    X_ALIGNED, Y_ALIGNED, NO_COLLISION = 0, 1, 2
+
     def __init__(self, game):
         self.game = game
 
@@ -20,16 +22,17 @@ class G_logics(object):
         return velocity_input + strength
 
     # reaction forces
-    def is_collided(self, rect_input1, rect_input2):                            # Axis-Aligned Bounding Box Collision Logic
-        if (rect_input1[0] < rect_input2[0] + rect_input2[2] and
-            rect_input2[0] < rect_input1[0] + rect_input1[2] and
-            rect_input1[1] < rect_input2[1] + rect_input2[3] and
-            rect_input2[1] < rect_input1[1] + rect_input1[3]):
-            return True
-        return False
+    def is_collided(self, rect_input1, rect_input2):                    # Axis-Aligned Bounding Box Collision Logic
+        if     (rect_input1[0] < rect_input2[0] + rect_input2[2] and    #collides horizontally
+                rect_input2[0] < rect_input1[0] + rect_input1[2]):
+                return 0
+        if     (rect_input1[1] < rect_input2[1] + rect_input2[3] and    #collides vertically
+                rect_input2[1] < rect_input1[1] + rect_input1[3]):
+                return 1
+        return 3                                                        #no collision
     def collide_with_all_rects(self, rects):
         for rect in rects:
-            if G_logics.is_collided(self, self.rect_val, rect):
+            if GameLogics.is_collided(self, self.rect_val, rect):
                 return True
         return False
     def apply_friction(self, velocity_input):
