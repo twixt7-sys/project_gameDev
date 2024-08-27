@@ -18,6 +18,6 @@ while g1.run:
     loop.set_loop()
     loop.set_events()
     loop.set_background(d.color[d.LIGHT_GREY])
-    main_sprite.update() 
+    main_sprite.update()
     loop.update_display()
 g1.quit()

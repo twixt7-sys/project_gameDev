@@ -1,3 +1,2 @@
-import os
-import sys
-sys.path.append(os.path.abspath('Entity_'))
+import AttributesClass as at
+import MethodsClass as met

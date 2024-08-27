@@ -1,4 +1,6 @@
-class Attributes:
+class AttributesClass:
+    def __init__(self, entity):
+        self.entity = entity
     def positional_attributes(self, size, center):
         self.size = size
         self.center = center
