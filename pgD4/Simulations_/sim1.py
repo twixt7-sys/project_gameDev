@@ -1,18 +1,27 @@
-import __init__ as init
+import sys
+import os
+sys.path.append(os.path.abspath('pgD4'))
 
-g1 = init.g.Game()
+from Game_.GameObj_ import GameObj as g
+from Tools_ import DictionaryClass as d
+from Game_.GameObj_ import EnvironmentClass as env
+from Game_.GameLogics_ import GameLogicsClass as log
+from Game_.Entity_ import EntityClass as ent
+from Game_.GameObj_ import LoopClass as lp
+
+g1 = g.Game()
 g1.set_window()
-d = init.dic.Dictionary()
+d = d.Dictionary()
 
-e = init.env.Environment()
+e = env.Environment()
 g1.environment = e
-logic = init.log.GameLogics(g1)
+logic = log.GameLogics(g1)
 g1.logic = logic
 
-main_sprite = init.ent.Entity(g1, g1.center, [20, 20], 0.1, d.color[d.DARK_GREY])
+main_sprite = ent.Entity(g1, g1.center, [20, 20], 0.1, d.color[d.DARK_GREY])
 main_sprite.is_controllable = True
 
-loop = init.lp.Loop(g1)
+loop = lp.Loop(g1)
 
 while g1.run:
     loop.set_loop()
