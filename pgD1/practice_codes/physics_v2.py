@@ -17,7 +17,7 @@ pg.display.set_caption("Physics v2")
 gravity = 1
 
 # Initialize sprites
-s1 = s.Sprites_g2(list(win_center), [0, 0], [0, gravity], [0, gravity], [10, 10], (255, 255, 255))
+s1 = s.Sprites_g2(list(win_center), [0, 0], [0, gravity], [0, gravity], [100, 100], (255, 255, 255))
 s1.win_border = win_size
 p1 = s.Sprites_g2([10, win_size[1]], [0, 0], [0, 0], [0, 0], [win_size[0], 10], (50, 50, 50))
 p2 = s.Sprites_g2([500, 750], [0, 0], [0, 0], [0, 0], [200, 10], (50, 50, 50))
@@ -29,7 +29,7 @@ s1.platform = platforms
 
 run = True
 while run:
-    pg.time.Clock().tick(60)
+    pg.time.Clock().tick(30)
     current_time = pg.time.get_ticks()
     for event in pg.event.get():
         if event.type == pg.QUIT:
