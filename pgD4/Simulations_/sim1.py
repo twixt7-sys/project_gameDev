@@ -18,7 +18,7 @@ g1.environment = e
 logic = log.GameLogics(g1)
 g1.logic = logic
 
-main_sprite = ent.Entity(g1, g1.center, [20, 20], 0.1, d.color[d.DARK_GREY])
+main_sprite = ent.Entity(g1, g1.center, [20, 20], 0.02, d.color[d.DARK_GREY])
 main_sprite.is_controllable = True
 
 loop = lp.Loop(g1)

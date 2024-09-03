@@ -29,17 +29,20 @@ class GameLogics(object):
         if     (rect_input1[1] < rect_input2[1] + rect_input2[3] and    #collides vertically
                 rect_input2[1] < rect_input1[1] + rect_input1[3]):
                 return 1
-        return 3                                                        #no collision
-    def collide_with_all_rects(self, rects):
+        return 2                                                        #no collision
+    def collide_with_all_rects(self, sprite_rect, rects):
         for rect in rects:
-            if GameLogics.is_collided(self, self.rect_val, rect):
-                return True
-        return False
+            if GameLogics.is_collided(self, sprite_rect, rect) == 0:
+                return 0
+            if GameLogics.is_collided(self, sprite_rect, rect) == 1:
+                return 1
+            if GameLogics.is_collided(self, sprite_rect, rect) == 2:
+                return 2
     def apply_friction(self, velocity_input):
         friction = self.object.fric_val
         return velocity_input * friction
     def apply_bounce(self, velocity_input):
-        bounce = self.object.bounce_val
+        bounce = self.game.rects_bounce_val
         return velocity_input * -bounce
 
     def apply_cooldown(self, action1, action2, action_cooldown, current_time, last_action_time):

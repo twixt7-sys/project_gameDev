@@ -38,7 +38,15 @@ class Entity:
         if self.is_controllable:
             Methods.move(self)
         if self.is_tangible:
-            self.is_collided = self.game.logic.collide_with_all_rects(self.game.rects)
+            bounce_axis = self.game.logic.collide_with_all_rects(self.rect_val, self.game.rects)
+            if bounce_axis == 0:
+                self.velocity[0] == self.game.logic.apply_bounce(self.velocity[0])
+                print("bounced x")
+            if bounce_axis == 1:
+                self.velocity[1] == self.game.logic.apply_bounce(self.velocity[1])
+                print("bounced y")
+            if bounce_axis == 2:
+                self.velocity[1] == self.game.logic.apply_bounce(self.velocity[1])
         if self.is_gravity_affected:
             self.velocity[1] = self.game.logic.apply_gravity(self.velocity[1])
         if self.is_wind_affected:
@@ -56,7 +64,6 @@ class Entity:
         # recalculate position and rect_val
         self.pos = [self.center[0] - self.size[0] / 2, self.center[1] - self.size[1] / 2]
         self.rect_val = [self.pos[0], self.pos[1], self.size[0], self.size[1]]
-        print(f"Updated position to: {self.center}, Velocity: {self.velocity}")
 
     def draw_sprite(self):
         self.game.pyg.draw.rect(self.game.win, self.color, self.rect_val)

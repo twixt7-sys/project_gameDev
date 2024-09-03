@@ -17,6 +17,7 @@ class Game(object):
         self.environment = None
         self.logic = None
         self.rects = [top, bottom, left, right]
+        self.rects_bounce_val = 0.1
 
     def set_window(self):
         self.win = self.pyg.display.set_mode(self.size)
