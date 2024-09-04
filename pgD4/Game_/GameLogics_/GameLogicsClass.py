@@ -23,20 +23,21 @@ class GameLogics(object):
 
     # reaction forces
     def is_collided(self, rect_input1, rect_input2):                    # Axis-Aligned Bounding Box Collision Logic
-        if     (rect_input1[0] < rect_input2[0] + rect_input2[2] and    #collides horizontally
-                rect_input2[0] < rect_input1[0] + rect_input1[2]):
-                return 0
-        if     (rect_input1[1] < rect_input2[1] + rect_input2[3] and    #collides vertically
-                rect_input2[1] < rect_input1[1] + rect_input1[3]):
-                return 1
-        return 2                                                        #no collision
+        if     (not(rect_input1[0] < rect_input2[0] + rect_input2[2] and    #collides horizontally
+                rect_input2[0] < rect_input1[0] + rect_input1[2])):
+            return 0
+        if     (not(rect_input1[1] < rect_input2[1] + rect_input2[3] and    #collides vertically
+                rect_input2[1] < rect_input1[1] + rect_input1[3])):
+            return 1
+        return 2
     def collide_with_all_rects(self, sprite_rect, rects):
         for rect in rects:
-            if GameLogics.is_collided(self, sprite_rect, rect) == 0:
+            collision_val = GameLogics.is_collided(self, sprite_rect, rect)
+            if collision_val == 0:
                 return 0
-            if GameLogics.is_collided(self, sprite_rect, rect) == 1:
+            if collision_val == 1:
                 return 1
-            if GameLogics.is_collided(self, sprite_rect, rect) == 2:
+            if collision_val == 2:
                 return 2
     def apply_friction(self, velocity_input):
         friction = self.object.fric_val
