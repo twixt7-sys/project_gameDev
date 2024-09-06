@@ -22,23 +22,31 @@ class GameLogics(object):
         return velocity_input + strength
 
     # reaction forces
-    def is_collided(self, rect_input1, rect_input2):                    # Axis-Aligned Bounding Box Collision Logic
-        if     (not(rect_input1[0] < rect_input2[0] + rect_input2[2] and    #collides horizontally
-                rect_input2[0] < rect_input1[0] + rect_input1[2])):
-            return 0
-        if     (not(rect_input1[1] < rect_input2[1] + rect_input2[3] and    #collides vertically
-                rect_input2[1] < rect_input1[1] + rect_input1[3])):
-            return 1
-        return 2
+    def is_collided(self, rect_input1, rect_input2):   # Axis-Aligned Bounding Box Collision Logic
+        x1, y1, w1, h1 = rect_input1
+        x2, y2, w2, h2 = rect_input2  # Use h2 for rect_input2
+        
+        # Check if there is overlap on both x and y axes
+        x_overlap = not (x1 < x2 + w2 and x2 < x1 + w1)
+        y_overlap = (y1 < y2 + h2 and y2 < y1 + h1)
+        
+        if x_overlap:
+            return 0  # Overlap on x-axis only
+        if y_overlap:
+            return 1  # Overlap on y-axis only
+        if not x_overlap and not y_overlap:
+            return 2  # No collision
+
     def collide_with_all_rects(self, sprite_rect, rects):
         for rect in rects:
             collision_val = GameLogics.is_collided(self, sprite_rect, rect)
+            if collision_val == 2:
+                return 2
             if collision_val == 0:
                 return 0
             if collision_val == 1:
                 return 1
-            if collision_val == 2:
-                return 2
+
     def apply_friction(self, velocity_input):
         friction = self.object.fric_val
         return velocity_input * friction

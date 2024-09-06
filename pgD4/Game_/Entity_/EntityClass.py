@@ -39,14 +39,10 @@ class Entity:
             Methods.move(self)
         if self.is_tangible:
             bounce_axis = self.game.logic.collide_with_all_rects(self.rect_val, self.game.rects)
-            if  bounce_axis == 0:
-                self.velocity[0] == self.game.logic.apply_bounce(self.velocity[0])
-                print("bounced x")
-            elif bounce_axis == 1:
-                self.velocity[1] == self.game.logic.apply_bounce(self.velocity[1])
-                print("bounced y")
+            if bounce_axis != 2:  # If collision on X or Y
+                self.velocity = self.game.logic.apply_bounce(self.velocity)
+                print(f"Bounced on {'x' if bounce_axis == 0 else 'y'} axis")
             if bounce_axis == 2:
-                self.velocity[1] == self.game.logic.apply_bounce(self.velocity[1])
                 print("no bounce")
 
             bounce_axis = 2

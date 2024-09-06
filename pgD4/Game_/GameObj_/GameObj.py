@@ -9,15 +9,15 @@ class Game(object):
         # other properties
         self.frame_rate = 0
         # edge collision boxes
-        top     = self.top      =   (0, -10, self.size[0], 10)
-        bottom  = self.bottom   =   (0, self.size[1], self.size[0], 10)
+        top     = self.top      =   (0, -100, self.size[0], 100)
+        bottom  = self.bottom   =   (0, self.size[1], self.size[0], 100)
         left    = self.left     =   (-10, 0, 10, self.size[1])
         right   = self.right    =   (self.size[0], 0, 10, self.size[1])
         # environment attribute
         self.environment = None
         self.logic = None
         self.rects = [top, bottom, left, right]
-        self.rects_bounce_val = 0.2
+        self.rects_bounce_val = 1
 
     def set_window(self):
         self.win = self.pyg.display.set_mode(self.size)

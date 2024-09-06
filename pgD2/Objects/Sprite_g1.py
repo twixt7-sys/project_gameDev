@@ -22,7 +22,7 @@ class Sprite_g1(object):
         #object detection
         s.platforms = []
         
-        image = pyg.image.load('kinit.png')
+        image = pyg.image.load('rae.png')
         s.scaled_image = pyg.transform.smoothscale(image, (self.size[0], self.size[1]))
 
     def update_sprite(self):
