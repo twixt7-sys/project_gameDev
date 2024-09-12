@@ -22,8 +22,6 @@ class Sprite_g1(object):
         #object detection
         s.platforms = []
         
-        image = pyg.image.load('rae.png')
-        s.scaled_image = pyg.transform.smoothscale(image, (self.size[0], self.size[1]))
 
     def update_sprite(self):
         Sprite_g1.environment_response(self)
@@ -44,8 +42,7 @@ class Sprite_g1(object):
 
     def draw_sprite(self):
         if self.shape == Sprite_g1.RECT:
-            self.game.win.blit(self.scaled_image, (self.pos[0], self.pos[1]))
-            #pyg.draw.rect(self.game.win, self.color, (self.pos[0], self.pos[1], self.size[0], self.size[1]))
+            pyg.draw.rect(self.game.win, self.color, (self.pos[0], self.pos[1], self.size[0], self.size[1]))
 
     # other methods
     def collide_with_border(self):

@@ -18,7 +18,7 @@ TRAIL_COLOR = (255, 0, 0, 30)  # Slightly transparent red for trail
 # Ball properties
 ball_radius = 20
 ball_pos = [SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2]
-ball_speed = [4, 3]  # Speed along x and y
+ball_speed = [10, 10]  # Speed along x and y
 
 # Trail properties
 trail_length = 20
