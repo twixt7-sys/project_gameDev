@@ -1,0 +1,12 @@
+Order of setup:
+    - make game object
+    - set window
+    - instantiate logic and environment
+    - instantiate in-game objects
+    - game loop: (while game.run:)
+        > set loop
+        > set events
+        > set background
+        > in-loop game methods
+        > update display
+    - quit
