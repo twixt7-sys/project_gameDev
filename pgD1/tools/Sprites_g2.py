@@ -48,11 +48,8 @@ class Sprites_g2(object):
     
     def update_sprite(self, win, current_time):
         self.current_time = current_time
-        image = pg.image.load('kinit.png')
-        resized_image = pg.transform.smoothscale(image, (self.size[0], self.size[1]))
         if self.is_alive:
-            win.blit(resized_image, (self.pos[0], self.pos[1]))
-            #pg.draw.rect(win, self.color, (self.pos[0], self.pos[1], self.size[0], self.size[1]))
+            pg.draw.rect(win, self.color, (self.pos[0], self.pos[1], self.size[0], self.size[1]))
             self.vel[1] += self.accel[1]  # Apply gravity
             self.pos[0] += self.vel[0]
             self.pos[1] += self.vel[1]
