@@ -35,10 +35,11 @@ while(g1.run):
     
     g1.pyg.draw.circle(g1.win, (color * 0.5, color* 0.5, color * 0.6), g1.center, radius/200 * 100)
 
-    for i in range(0, 3):
-        g1.pyg.draw.circle(g1.win, (color, color, color), [250 + (i * 200), g1.center[1]], radius/200 * 100 / 4 + r.randrange(0, 10))
+    for i in range(0, 5):
+        for j in range(0, 5):
+            g1.pyg.draw.circle(g1.win, (100, 100, color*0.8), [50 + (i * 200), 50 + (j * 200)], radius/200 * 50 / 16 + r.randrange(0, 50))
 
-    color += color_increment 
+    color += color_increment
     if color >= 200 or color <= 0:
         color_increment *= -1
 
