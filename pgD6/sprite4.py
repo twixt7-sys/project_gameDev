@@ -7,7 +7,7 @@ pygame.init()
 WIDTH, HEIGHT = 900, 600
 FPS = 30  # Adjusted for smoother animation
 SCALE_FACTOR = 3
-ACCELERATION = 2
+ACCELERATION = 3
 FRICTION = 0.15  # Added friction for smoother movement
 
 # Initialize screen
