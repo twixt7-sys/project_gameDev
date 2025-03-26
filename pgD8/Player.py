@@ -1,69 +1,64 @@
 import pygame as pg
+import math
+import Animation
 
 class Player:
-    def __init__(self, sprite_sheet, pos=[20,20], scale_factor=1, resolution=[32,32], statbar=None , frame_rate=200, screen=None):
-        self.sprite_sheet = pg.image.load(sprite_sheet).convert_alpha()
-        self.pos = pos
-        self.resolution = resolution
-        self.scale_factor = scale_factor
-        self.frame_rate = frame_rate
-        self.loop = True
-        self.frames = []
-        self.original_frames = []
-        self.current_frame = 0
-        self.last_update = pg.time.get_ticks()
-        self.extract_frames()
-        
-        self.statbar = statbar
-        
-        self.screen = screen
-        self.afterimages = []
-        
+    def __init__(self, pos, scale_factor=1, resolution=[32,32], statbar=None , frame_rate=200, screen=None):
         # Movement variables
-        self.dir = [0, 0]
-        self.vel = [0, 0]
-        self.acc = [0, 0]
-        
-        # Key Control variables
+        self.dir, self.pos, self.vel, self.acc  = [0, 0], pos, [0, 0], [0, 0]
+        # Sprite variables
+        self.scale_factor = scale_factor
+        self.statbar = statbar
+        self.screen = screen
+        # Control keys and animations
         self.control = {
             "up": pg.K_UP,
             "down": pg.K_DOWN,
             "left": pg.K_LEFT,
             "right": pg.K_RIGHT,
-            "dash": pg.K_SPACE
+            "dash": pg.K_SPACE,
+            "slash": pg.K_z
+        }
+        self.animations = {
+            "idle": Animation(self.frames, 10, pg.time),
+            "moving": Animation(self.frames, 100, pg.time),
+            "slash": Animation(self.frames["slash"], 10, pg.time)
         }
         
         # Stat variables
-        self.health = 100
-        self.mana = 100
-        self.stamina = 100
+        self.stats = {
+            "health": 100,
+            "mana": 100,
+            "stamina": 100,
+        }
         self.regen = [0.5, 0.5, 0.5]
-        
-        # Attribute variables
-        self.speed = 0.5
+        self.stm_cost = {
+            "dash": 1.5,
+            "slash": 10
+        }
+
+        # Movement Attributes
+        self.speed = 1
         self.friction = 0.15
-        self.dash_power = 2
+        self.dash_power = 3
+        
+        # Magic Attributes
+        # Combat Attributes
+        
         
         # State variables
         self.movement_state = "idle"
         self.magic_state = "idle"
         self.combat_state = "idle"
-    
-    def extract_frames(self):
-        for i in range(self.sprite_sheet.get_width() // self.resolution[0]):
-            frame = self.sprite_sheet.subsurface(pg.Rect(i * self.resolution[0], 0, self.resolution[0], self.resolution[1]))
-            scaled_frame = pg.transform.scale(frame, (self.resolution[0] * self.scale_factor, self.resolution[1] * self.scale_factor))
-            self.frames.append(scaled_frame)
-        self.original_frames = self.frames[:]
+        
+        self.init_animations(self)
+
+    def init_animations(self):
+        self.animations["idle"].load_frames("pdD8/player.png", 1, 4, 32, 32)
+        self.animations["moving"].load_frames("pgD8/player.png", 1, 4, 32, 32)
     
     def update(self):
-        now = pg.time.get_ticks()
-        if now - self.last_update > self.frame_rate:
-            self.current_frame = (self.current_frame + 1) % len(self.frames)
-            self.last_update = now
-        
         # Movement updates
-        self.move()
         self.handle_actions()
         self.handle_physics()
         self.update_direction()
@@ -80,11 +75,13 @@ class Player:
         self.apply_states()
         self.update_states()
     
-    def draw(self):
-        if self.screen:
-            self.screen.blit(self.frames[self.current_frame], self.pos)
-            self.draw_afterimages()
-
+    def handle_actions(self):
+        keys = pg.key.get_pressed()
+        self.move(keys)
+        if keys[self.control["dash"]]:
+            self.dash(keys)
+        if keys[self.control["slash"]]:
+            self.slash()
     def dash(self, keys):
         if self.stamina > 10:
             if keys[self.control["up"]]:
@@ -95,15 +92,36 @@ class Player:
                 self.vel[0] += -self.dash_power
             elif keys[self.control["right"]]:
                 self.vel[0] += self.dash_power
-            self.create_afterimage()
-            self.stamina -= 1.5
+            self.stamina -= self.stm_cost["dash"]
+            self.animations["dash"].animate(self.screen, self.pos)
+    def slash(self):
+        slash_sheet = pg.image.load("pgD8/slash.png").convert_alpha()
+        slash_frames = [slash_sheet.subsurface((i * 32, 0, 32, 32)) for i in range(7)]
+        
+        frame_delay = 100  # Delay in milliseconds (adjust for slower/faster slash)
+        last_frame_time = pg.time.get_ticks()
+        
+        for frame in slash_frames:
+            # timing logic
+            now = pg.time.get_ticks()
+            while now - last_frame_time < frame_delay:
+                now = pg.time.get_ticks()  # Wait until enough time has passed
+            
+            self.screen.blit(frame, self.pos)
+            pg.display.flip()
+            last_frame_time = now  # Update last frame time
+        
+        self.stamina -= 10
+    
+    def draw(self):
+        if self.screen:
+            self.screen.blit(self.frames[self.current_frame], self.pos)
+            self.draw_afterimages()
 
-    def move(self):
+    def move(self, keys):
         # Reset acceleration
         self.acc = [0, 0]
-        
         # Moving sprite by applying acceleration
-        keys = pg.key.get_pressed()
         if keys[self.control["up"]]:
             self.acc[1] = -self.speed
         if keys[self.control["down"]]:
@@ -112,11 +130,6 @@ class Player:
             self.acc[0] = -self.speed
         if keys[self.control["right"]]:
             self.acc[0] = self.speed
-    
-    def handle_actions(self):
-        keys = pg.key.get_pressed()
-        if keys[self.control["dash"]]:
-            self.dash(keys)
 
     def handle_physics(self):
         # Apply acceleration to velocity
@@ -133,19 +146,8 @@ class Player:
         
     def update_direction(self):
         # Update direction based on velocity
-        if self.vel[0] > 0:
-            self.dir[0] = 1
-        elif self.vel[0] < 0:
-            self.dir[0] = -1
-        else:
-            self.dir[0] = 0
-        
-        if self.vel[1] > 0:
-            self.dir[1] = 1
-        elif self.vel[1] < 0:
-            self.dir[1] = -1
-        else:
-            self.dir[1] = 0
+        self.dir[0] = int(math.copysign(1, self.vel[0])) if self.vel[0] != 0 else 0
+        self.dir[1] = int(math.copysign(1, self.vel[1])) if self.vel[1] != 0 else 0
         
         # Flip sprite left or right based on x direction
         if self.dir[0] > 0:
@@ -160,28 +162,25 @@ class Player:
         else:
             self.movement_state = "moving"
 
-    def apply_states(self):
+    def apply_movement_states(self):
         if self.movement_state == "moving":
             self.apply_regen([0.5, 0.5, 0.5])
-            self.frame_rate = 100
+            self.animations["moving"].animate(self.screen, self.pos)
         elif self.movement_state == "idle":
-            self.apply_regen([self.regen[0],
-                              self.regen[1],
-                              self.regen[2]])
-            self.frame_rate = 500
+            self.apply_regen([self.regen[0], self.regen[1], self.regen[2]])
+            self.animations["idle"].animate(self.screen, self.pos)
+    def apply_combat_states(self):
+        if self.combat_state == "attacking":
+            self.animations["attacking"].animate(self.screen, self.pos)
+        if self.combat_state == "idle":
+            pass
+    def apply_magic_states(self):
+        pass
     
     def apply_regen(self, stats):
         self.health = min(self.health + stats[0], 100)
         self.mana = min(self.mana + stats[1], 100)
         self.stamina = min(self.stamina + stats[2], 100)
-            
-    def create_afterimage(self):
-        if self.screen:
-            self.screen.blit(self.frames[self.current_frame], self.pos)
-            pg.display.flip()
-            pg.time.delay(50)
-            pg.draw.rect(self.screen, (0, 0, 0), (self.pos[0], self.pos[1], self.frame_width, self.frame_height))
-            pg.display.flip()
             
     def create_afterimage(self):
         if self.screen:

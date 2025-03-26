@@ -1,7 +1,7 @@
 import pygame as pg
 
 class GridSystem:
-    def __init__(self, win, win_size, cell_size=(100, 100), grid_size=(10, 5)):
+    def __init__(self, win, win_size, cell_size=(300, 300), grid_size=(5, 3)):
         self.win = win
         self.win_size = win_size
         self.cell_size = cell_size
