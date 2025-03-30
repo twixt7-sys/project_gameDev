@@ -18,7 +18,7 @@ tile2 = g.transform.scale(tile2, (SCALE_FACTOR, SCALE_FACTOR))
 
 grid = GridSys.GridSystem(win, win_size, (300, 300), (3, 3))
 stat_bar = Statbar.StatBar()
-player = Player.Player("pgD8/player.png", pos=[100,100], scale_factor=3, statbar=stat_bar, frame_rate=100, screen=win)
+player = Player.Player([100,100], stat_bar, win)
 
 g.display.update()
 
@@ -28,12 +28,9 @@ while running:
         if event.type == g.QUIT:
             running = False
 
-    # Update
-    player.update()
-
     grid.draw(tile2, tile)
-    stat_bar.draw(win)
-    player.draw()
+    stat_bar.update(win, player.stats, (0, 0), player.stat_colors)
+    player.update()
 
     g.display.update()
 

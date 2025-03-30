@@ -1,15 +1,16 @@
 import pygame as pg
 import math
-import Animation
+import Animation as a
 
 class Player:
-    def __init__(self, pos, scale_factor=1, resolution=[32,32], statbar=None , frame_rate=200, screen=None):
+    def __init__(self, pos, statbar, screen):
         # Movement variables
         self.dir, self.pos, self.vel, self.acc  = [0, 0], pos, [0, 0], [0, 0]
         # Sprite variables
-        self.scale_factor = scale_factor
+        self.scale_factor = 3
         self.statbar = statbar
         self.screen = screen
+        
         # Control keys and animations
         self.control = {
             "up": pg.K_UP,
@@ -20,18 +21,17 @@ class Player:
             "slash": pg.K_z
         }
         self.animations = {
-            "idle": Animation(self.frames, 10, pg.time),
-            "moving": Animation(self.frames, 100, pg.time),
-            "slash": Animation(self.frames["slash"], 10, pg.time)
+            "idle": a.Animation("pgD8/player.png", pg.time, 10, [1, 4]),
+            "moving": a.Animation("pgD8/player.png", pg.time, 50, [1, 4]),
+            "dash": a.Animation("pgD8/player.png", pg.time, 100, [1, 4]),
+            "slash": a.Animation("pgD8/slash.png", pg.time, 10, [1, 7]),
+            
         }
         
         # Stat variables
-        self.stats = {
-            "health": 100,
-            "mana": 100,
-            "stamina": 100,
-        }
-        self.regen = [0.5, 0.5, 0.5]
+        self.stats = [100, 100, 100]  # HP, MP, STM
+        self.stat_colors = [(200, 80, 80), (80, 80, 200), (200, 200, 80)]
+        self.regen = [0.5, 0.5, 0.5]  # HP, MP, STM
         self.stm_cost = {
             "dash": 1.5,
             "slash": 10
@@ -45,36 +45,26 @@ class Player:
         # Magic Attributes
         # Combat Attributes
         
-        
         # State variables
         self.movement_state = "idle"
         self.magic_state = "idle"
         self.combat_state = "idle"
-        
-        self.init_animations(self)
 
-    def init_animations(self):
-        self.animations["idle"].load_frames("pdD8/player.png", 1, 4, 32, 32)
-        self.animations["moving"].load_frames("pgD8/player.png", 1, 4, 32, 32)
-    
     def update(self):
-        # Movement updates
+        # States
+        self.update_states()
+        self.apply_movement_states()
+        self.apply_magic_states()
+        self.apply_combat_states()
+        
+        # Movement
+        self.update_direction()
         self.handle_actions()
         self.handle_physics()
-        self.update_direction()
         
         # Update stat bars
-        self.statbar.set_stats([
-            ((200, 80, 80), self.health),
-            ((80, 80, 200), self.mana),
-            ((80, 200, 80), self.stamina)
-        ])
-        self.draw_statbars(self.statbar)
+        self.statbar.update(self.screen, self.stats, self.pos, self.stat_colors)
 
-        # Update state
-        self.apply_states()
-        self.update_states()
-    
     def handle_actions(self):
         keys = pg.key.get_pressed()
         self.move(keys)
@@ -82,6 +72,16 @@ class Player:
             self.dash(keys)
         if keys[self.control["slash"]]:
             self.slash()
+    def move(self, keys):
+        self.acc = [0, 0]
+        if keys[self.control["up"]]:
+            self.acc[1] = -self.speed
+        if keys[self.control["down"]]:
+            self.acc[1] = self.speed
+        if keys[self.control["left"]]:
+            self.acc[0] = -self.speed
+        if keys[self.control["right"]]:
+            self.acc[0] = self.speed
     def dash(self, keys):
         if self.stamina > 10:
             if keys[self.control["up"]]:
@@ -93,75 +93,37 @@ class Player:
             elif keys[self.control["right"]]:
                 self.vel[0] += self.dash_power
             self.stamina -= self.stm_cost["dash"]
-            self.animations["dash"].animate(self.screen, self.pos)
+            anim = self.animations["dash"]
+            anim.make_trail(self.pos)
     def slash(self):
-        slash_sheet = pg.image.load("pgD8/slash.png").convert_alpha()
-        slash_frames = [slash_sheet.subsurface((i * 32, 0, 32, 32)) for i in range(7)]
-        
-        frame_delay = 100  # Delay in milliseconds (adjust for slower/faster slash)
-        last_frame_time = pg.time.get_ticks()
-        
-        for frame in slash_frames:
-            # timing logic
-            now = pg.time.get_ticks()
-            while now - last_frame_time < frame_delay:
-                now = pg.time.get_ticks()  # Wait until enough time has passed
-            
-            self.screen.blit(frame, self.pos)
-            pg.display.flip()
-            last_frame_time = now  # Update last frame time
-        
-        self.stamina -= 10
-    
-    def draw(self):
-        if self.screen:
-            self.screen.blit(self.frames[self.current_frame], self.pos)
-            self.draw_afterimages()
-
-    def move(self, keys):
-        # Reset acceleration
-        self.acc = [0, 0]
-        # Moving sprite by applying acceleration
-        if keys[self.control["up"]]:
-            self.acc[1] = -self.speed
-        if keys[self.control["down"]]:
-            self.acc[1] = self.speed
-        if keys[self.control["left"]]:
-            self.acc[0] = -self.speed
-        if keys[self.control["right"]]:
-            self.acc[0] = self.speed
-
+        self.stamina -= self.stm_cost["slash"]
+        self.animations["slash"].animate(self.screen, self.pos)
     def handle_physics(self):
         # Apply acceleration to velocity
         self.vel[0] += self.acc[0]
         self.vel[1] += self.acc[1]
-        
         # Apply velocity to position first
         self.pos[0] += self.vel[0]
         self.pos[1] += self.vel[1]
-        
         # Apply friction to velocity
         self.vel[0] *= (1 - self.friction)
         self.vel[1] *= (1 - self.friction)
-        
+
     def update_direction(self):
         # Update direction based on velocity
         self.dir[0] = int(math.copysign(1, self.vel[0])) if self.vel[0] != 0 else 0
         self.dir[1] = int(math.copysign(1, self.vel[1])) if self.vel[1] != 0 else 0
-        
         # Flip sprite left or right based on x direction
-        if self.dir[0] > 0:
-            self.frames = self.original_frames
-        elif self.dir[0] < 0:
-            self.frames = [pg.transform.flip(frame, True, False) for frame in self.original_frames]
+        anim = self.animations["moving"]
+        if self.dir[0] != 0:
+            anim.flip_frames(self.dir[0] < 0, False)
 
-    # Movement state functions
+    # States
     def update_states(self):
         if (self.vel[0] <= 0.5 and self.vel[0] >= -0.5) and (self.vel[1] <= 0.5 and self.vel[1] >= -0.5):
             self.movement_state = "idle"
         else:
             self.movement_state = "moving"
-
     def apply_movement_states(self):
         if self.movement_state == "moving":
             self.apply_regen([0.5, 0.5, 0.5])
@@ -176,31 +138,9 @@ class Player:
             pass
     def apply_magic_states(self):
         pass
-    
-    def apply_regen(self, stats):
-        self.health = min(self.health + stats[0], 100)
-        self.mana = min(self.mana + stats[1], 100)
-        self.stamina = min(self.stamina + stats[2], 100)
-            
-    def create_afterimage(self):
-        if self.screen:
-            afterimage = self.frames[self.current_frame].copy()
-            afterimage.set_alpha(200)  # Start with a semi-transparent image
-            self.afterimages.append([afterimage, self.pos[:], 15])  # (Image, Position, Lifespan)
 
-    def draw_afterimages(self):
-        for afterimage in self.afterimages:
-            image, pos, lifespan = afterimage
-            alpha = int((lifespan / 15) * 200)  # Scale alpha from 200 to 0
-            image.set_alpha(max(alpha - 100, 0))  # Ensure it doesn't go negative
-            self.screen.blit(image, pos)
-            afterimage[2] -= 1  # Reduce lifespan
+    def apply_regen(self, regen):
+        self.health = min(self.stats[0] + regen[0], 100)
+        self.mana = min(self.stats[1] + regen[1], 100)
+        self.stamina = min(self.stats[2] + regen[2], 100)
 
-        # Remove fully transparent afterimages
-        self.afterimages = [img for img in self.afterimages if img[2] > 0]
-        
-    def draw_statbars(self, statbar):
-        # Draw stat bars that follows the player
-        if self.screen and statbar:
-            statbar.draw(self.screen)
-            self.statbar.pos = [self.pos[0], self.pos[1] - 15]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://cuq0o5tekc4um"]
+
+[ext_resource type="Texture2D" uid="uid://dhdtmptguvxwl" path="res://assets/sprites/slime.png" id="1_ai3qg"]
+[ext_resource type="Script" uid="uid://y71h0t1cfenb" path="res://scripts/slimey.gd" id="1_dpp58"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpp58"]
+atlas = ExtResource("1_ai3qg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtxdl"]
+atlas = ExtResource("1_ai3qg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qs2m"]
+atlas = ExtResource("1_ai3qg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qg0c"]
+atlas = ExtResource("1_ai3qg")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3wir6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpp58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtxdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qs2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qg0c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="slimey" type="AnimatableBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_dpp58")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+sprite_frames = SubResource("SpriteFrames_3wir6")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.439972

@@ -1,0 +1,117 @@
+[gd_scene load_steps=16 format=3 uid="uid://c1xnlnhhvhi6q"]
+
+[ext_resource type="Texture2D" uid="uid://op67ncbjh5nv" path="res://Assets/Entities/player.png" id="1_blnjl"]
+[ext_resource type="Script" uid="uid://blcvt0645apa5" path="res://Scenes/Entities/Player.gd" id="1_nqm6o"]
+[ext_resource type="Texture2D" uid="uid://op5nwy87126x" path="res://Assets/Entities/Running.png" id="3_a1rq5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qbyki"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_svftf"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a1rq5"]
+gradient = SubResource("Gradient_svftf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yqx0t"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 50, 0)
+color_initial_ramp = SubResource("GradientTexture1D_a1rq5")
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+anim_speed_min = 10.0
+anim_speed_max = 10.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbyki"]
+atlas = ExtResource("1_blnjl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svftf"]
+atlas = ExtResource("1_blnjl")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqm6o"]
+atlas = ExtResource("1_blnjl")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1rq5"]
+atlas = ExtResource("1_blnjl")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqx0t"]
+atlas = ExtResource("1_blnjl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofjh0"]
+atlas = ExtResource("1_blnjl")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a1rq5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbyki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svftf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqm6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1rq5")
+}],
+"loop": true,
+"name": &"sprint",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqx0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofjh0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nqm6o"]
+
+[node name="Player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+motion_mode = 1
+script = ExtResource("1_nqm6o")
+
+[node name="DashParticles" type="GPUParticles2D" parent="CharacterBody2D"]
+material = SubResource("CanvasItemMaterial_qbyki")
+texture = ExtResource("3_a1rq5")
+process_material = SubResource("ParticleProcessMaterial_yqx0t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_a1rq5")
+animation = &"sprint"
+autoplay = "idle"
+frame_progress = 0.21897
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(-1, 2)
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_nqm6o")
