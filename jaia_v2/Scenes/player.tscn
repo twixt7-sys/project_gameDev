@@ -1,6 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://06ku2xjrc8yo"]
+[gd_scene load_steps=20 format=3 uid="uid://06ku2xjrc8yo"]
 
 [ext_resource type="Texture2D" uid="uid://ruib6ygh514g" path="res://Assets/Entities/player.png" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://cggm1jirx0rcn" path="res://Scenes/health_component.tscn" id="2_vgqql"]
+[ext_resource type="PackedScene" uid="uid://qt5cecngx0pg" path="res://Scenes/attack_component.tscn" id="3_fkybt"]
+[ext_resource type="PackedScene" uid="uid://nghnyc6omo25" path="res://Scenes/hitbox_component.tscn" id="4_x3wgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -131,3 +134,9 @@ frame_progress = 0.145365
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_u1c27")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_vgqql")]
+
+[node name="AttackComponent" parent="." instance=ExtResource("3_fkybt")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_x3wgy")]
