@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bl1w3qbv4mxcg"]
+[gd_scene load_steps=14 format=4 uid="uid://bl1w3qbv4mxcg"]
 
 [ext_resource type="Texture2D" uid="uid://b1e7sp0tsf1bu" path="res://Assets/Tiles/grass_tile_64.png" id="1_3dryh"]
 [ext_resource type="PackedScene" uid="uid://06ku2xjrc8yo" path="res://Scenes/player.tscn" id="1_80nbo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dr5f4iautjyc5" path="res://Assets/Tiles/smallgrass.png" id="2_wowpa"]
 [ext_resource type="Script" uid="uid://dmqh5lbfk7ae1" path="res://Scripts/entities.gd" id="4_1l0tm"]
 [ext_resource type="Script" uid="uid://d2ysfgxy2h1b2" path="res://Scripts/player.gd" id="6_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://d3572ay5dsr2l" path="res://Scenes/weapon.tscn" id="7_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://bqd87t7tel1pd" path="res://Scenes/blue_slime.tscn" id="7_v158k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i6g32"]
@@ -72,8 +73,10 @@ position = Vector2(-2, -9)
 script = ExtResource("6_1l0tm")
 entity = NodePath("..")
 
+[node name="Weapon" parent="Entities/Player" instance=ExtResource("7_h4fw4")]
+
 [node name="Blue Slime" parent="Entities" instance=ExtResource("7_v158k")]
-position = Vector2(171, -8)
+position = Vector2(140, -4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)

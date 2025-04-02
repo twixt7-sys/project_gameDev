@@ -1,12 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqd87t7tel1pd"]
+[gd_scene load_steps=12 format=3 uid="uid://bqd87t7tel1pd"]
 
+[ext_resource type="Script" uid="uid://cq4jbch311pr7" path="res://Scripts/blue_slime.gd" id="1_15glr"]
 [ext_resource type="PackedScene" uid="uid://cggm1jirx0rcn" path="res://Scenes/health_component.tscn" id="1_032yx"]
-[ext_resource type="PackedScene" uid="uid://nghnyc6omo25" path="res://Scenes/hitbox_component.tscn" id="2_15glr"]
+[ext_resource type="PackedScene" uid="uid://dnihb6x2fa273" path="res://Scenes/hitbox_component.tscn" id="2_15glr"]
 [ext_resource type="Texture2D" uid="uid://7qvs63p8esp" path="res://Assets/Entities/slime.png" id="3_e7rq5"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_is1k4"]
-radius = 7.0
-height = 18.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02tk4"]
 atlas = ExtResource("3_e7rq5")
@@ -24,7 +21,7 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("3_e7rq5")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_unihl"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_15glr"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -44,19 +41,32 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Blue Slime" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_032yx"]
+radius = 7.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_15glr"]
+radius = 7.0
+height = 18.0
+
+[node name="Blue Slime" type="CharacterBody2D" node_paths=PackedStringArray("health")]
+script = ExtResource("1_15glr")
+health = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_032yx")]
-MAX_HEALTH = 50
-
-[node name="HitboxComponent" parent="." instance=ExtResource("2_15glr")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_is1k4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -1)
-sprite_frames = SubResource("SpriteFrames_unihl")
+sprite_frames = SubResource("SpriteFrames_15glr")
 autoplay = "default"
-frame_progress = 0.769299
+frame_progress = 0.0623771
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_032yx")
+
+[node name="HitboxComponent2" parent="." instance=ExtResource("2_15glr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent2"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_15glr")

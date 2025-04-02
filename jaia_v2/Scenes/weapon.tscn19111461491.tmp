@@ -1,0 +1,120 @@
+[gd_scene load_steps=14 format=3 uid="uid://dtbtv4flj6rbj"]
+
+[ext_resource type="Texture2D" uid="uid://cfruewjqs2qxq" path="res://Assets/Effects/slash.png" id="3_7imee"]
+[ext_resource type="PackedScene" uid="uid://qt5cecngx0pg" path="res://Scenes/attack_component.tscn" id="3_e1ly8"]
+
+[sub_resource type="GDScript" id="GDScript_e1ly8"]
+script/source = "extends Area2D
+
+@export var health_component: HealthComponent
+
+func damage(attack: AttackComponent):
+	if health_component:
+		health_component.damage(attack)
+		attack.attack_triggered()
+
+func _on_area_2d_body_entered(node: Area2D) -> void:
+	damage(AttackComponent.new())
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ufyc"]
+atlas = ExtResource("3_7imee")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq8hb"]
+atlas = ExtResource("3_7imee")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdh2e"]
+atlas = ExtResource("3_7imee")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxn8f"]
+atlas = ExtResource("3_7imee")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ho11"]
+atlas = ExtResource("3_7imee")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bhi5"]
+atlas = ExtResource("3_7imee")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfbv8"]
+atlas = ExtResource("3_7imee")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gv2dx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ufyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq8hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdh2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxn8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ho11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bhi5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfbv8")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"slash",
+"speed": 15.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_qv81b"]
+script/source = "extends Area2D
+
+
+
+func _ready() -> void:
+	pass # Replace with function body.
+
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qv81b"]
+size = Vector2(26, 32.6667)
+
+[node name="Weapon" type="Node2D"]
+script = SubResource("GDScript_e1ly8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(10, 0)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_gv2dx")
+animation = &"slash"
+frame_progress = 0.176523
+offset = Vector2(0, 5)
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
+script = SubResource("GDScript_qv81b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
+position = Vector2(13, 4.33333)
+shape = SubResource("RectangleShape2D_qv81b")
+
+[node name="AttackComponent" parent="." instance=ExtResource("3_e1ly8")]
+ATTACK_DMG = 10.0
+KNOCKBACK_FORCE = 10.0
+STUN_TIME = 1.0
