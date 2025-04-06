@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://dhhynuselpdt6"]
+
+[ext_resource type="Script" uid="uid://c6coqexujeiwk" path="res://Scripts/blue_slime.gd" id="1_g1x46"]
+[ext_resource type="Script" uid="uid://bundn4hfn4fsh" path="res://Scripts/hitbox_component.gd" id="2_y8sgr"]
+[ext_resource type="PackedScene" uid="uid://h8a15v0t06ui" path="res://Scenes/health_component.tscn" id="3_032yx"]
+[ext_resource type="Texture2D" uid="uid://b5aipjxl2u2ip" path="res://Assets/Entities/slime.png" id="4_15glr"]
+[ext_resource type="PackedScene" uid="uid://cjpig33p70cil" path="res://Scenes/ai_1.tscn" id="5_is1k4"]
+[ext_resource type="Script" uid="uid://rxslkldj43mf" path="res://Scripts/ai_1.gd" id="6_02tk4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_15glr"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7rq5"]
+atlas = ExtResource("4_15glr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_is1k4"]
+atlas = ExtResource("4_15glr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02tk4"]
+atlas = ExtResource("4_15glr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s0e8"]
+atlas = ExtResource("4_15glr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6bqke"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7rq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is1k4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02tk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s0e8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Blue Slime" type="CharacterBody2D"]
+script = ExtResource("1_g1x46")
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_comp")]
+script = ExtResource("2_y8sgr")
+health_comp = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_15glr")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_032yx")]
+MAX_HEALTH = 100.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_6bqke")
+autoplay = "default"
+frame_progress = 0.985513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_15glr")
+
+[node name="AI1" parent="." instance=ExtResource("5_is1k4")]
+script = ExtResource("6_02tk4")

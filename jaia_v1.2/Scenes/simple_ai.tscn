@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0h3025urp1xr"]
+
+[ext_resource type="Script" uid="uid://dchpsxrc63t" path="res://Scripts/simple_ai.gd" id="1_bbe85"]
+
+[node name="SimpleAI" type="Node2D"]
+script = ExtResource("1_bbe85")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bikkg54tg7nau"]
+
+[ext_resource type="Texture2D" uid="uid://bl3uhskboc0lh" path="res://Assets/Effects/fire_circle.png" id="1_p83pc"]
+
+[node name="FireCircle" type="Sprite2D"]
+position = Vector2(154, 215)
+texture = ExtResource("1_p83pc")

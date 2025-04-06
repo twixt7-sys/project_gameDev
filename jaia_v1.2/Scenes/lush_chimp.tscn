@@ -1,0 +1,75 @@
+[gd_scene load_steps=14 format=3 uid="uid://carqaem1053tg"]
+
+[ext_resource type="Texture2D" uid="uid://tnx3epbjlsls" path="res://Assets/Entities/lush chimp.png" id="1_poula"]
+[ext_resource type="PackedScene" uid="uid://h8a15v0t06ui" path="res://Scenes/health_component.tscn" id="2_siwnc"]
+[ext_resource type="PackedScene" uid="uid://cjpig33p70cil" path="res://Scenes/ai_1.tscn" id="3_ejmqa"]
+[ext_resource type="Script" uid="uid://rxslkldj43mf" path="res://Scripts/ai_1.gd" id="4_1fsxk"]
+[ext_resource type="PackedScene" uid="uid://ccge6q2aibo5k" path="res://Scenes/hitbox_component.tscn" id="5_l2ifp"]
+[ext_resource type="PackedScene" uid="uid://d0h3025urp1xr" path="res://Scenes/simple_ai.tscn" id="6_qql5f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_poula"]
+atlas = ExtResource("1_poula")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siwnc"]
+atlas = ExtResource("1_poula")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejmqa"]
+atlas = ExtResource("1_poula")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fsxk"]
+atlas = ExtResource("1_poula")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smhxj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_poula")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_siwnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejmqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fsxk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f0kjx"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_60a3a"]
+radius = 8.0
+
+[node name="lush chimp" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_smhxj")
+autoplay = "default"
+frame_progress = 0.442763
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_siwnc")]
+MAX_HEALTH = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_f0kjx")
+
+[node name="AI1" parent="." instance=ExtResource("3_ejmqa")]
+script = ExtResource("4_1fsxk")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_l2ifp")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_60a3a")
+
+[node name="SimpleAI" parent="." instance=ExtResource("6_qql5f")]

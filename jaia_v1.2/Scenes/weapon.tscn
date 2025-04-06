@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://dk6tmqi15mi2q"]
+
+[ext_resource type="Script" uid="uid://cg1rxdif24opp" path="res://Scripts/weapon.gd" id="1_e1ly8"]
+[ext_resource type="Texture2D" uid="uid://ctqh7omjdn4sf" path="res://Assets/Effects/slash.png" id="2_l036s"]
+[ext_resource type="PackedScene" uid="uid://ccge6q2aibo5k" path="res://Scenes/hitbox_component.tscn" id="3_e1ly8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mql6x"]
+atlas = ExtResource("2_l036s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ufyc"]
+atlas = ExtResource("2_l036s")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq8hb"]
+atlas = ExtResource("2_l036s")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdh2e"]
+atlas = ExtResource("2_l036s")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxn8f"]
+atlas = ExtResource("2_l036s")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ho11"]
+atlas = ExtResource("2_l036s")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bhi5"]
+atlas = ExtResource("2_l036s")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qv81b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mql6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ufyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq8hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdh2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxn8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ho11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bhi5")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1ly8"]
+size = Vector2(32, 35)
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_e1ly8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(12, 7)
+sprite_frames = SubResource("SpriteFrames_qv81b")
+frame = 8
+frame_progress = 1.0
+flip_h = true
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_e1ly8")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_e1ly8")
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
+[connection signal="area_exited" from="HitboxComponent" to="." method="_on_hitbox_component_area_exited"]
