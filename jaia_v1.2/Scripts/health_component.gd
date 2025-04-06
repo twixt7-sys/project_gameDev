@@ -11,7 +11,7 @@ func _ready():
 
 func damage(atk: Attack):
 	print("initial health: ", health)
-	health -= atk.atk_dmg
+	health -= atk.damage
 	print("remaining health: ", health)
 	if health <= 0:
 		get_parent().queue_free()

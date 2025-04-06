@@ -5,7 +5,7 @@ extends CharacterBody2D
 signal damage_dealt(target, atk)
 
 @onready var sprite := $AnimatedSprite2D
-@onready var atk := $Attack
+@onready var atk:= Attack.new(global_position)
 @onready var weapon: Weapon = $Weapon
 
 @export var ACCELERATION: float = 15.0
@@ -19,7 +19,7 @@ var direction
 func _physics_process(delta: float) -> void:
 	move(delta)
 	flip_h()
-	atk.attack(sprite, Input.is_action_just_pressed("attack"), attack) # calls function below
+	atk.attack(sprite, Input.is_action_just_pressed("attack"), attack)
 	animate_movement()
 
 func move(delta):
@@ -54,9 +54,9 @@ func attack():
 	atk.origin = global_position
 	weapon.attack()
 
-func _on_weapon_damage_dealt(hitbox: HitboxComponent, atk: Attack) -> void:
+func _on_weapon_damage_dealt(hitbox: HitboxComponent) -> void:
 	print("[weapon to player]: damage dealt!")
-	print("value: ", atk.atk_dmg)
+	print("value: ", atk.damage)
 	var target = hitbox.get_parent()
 	print("target: ", target)
 	emit_signal("damage_dealt", target, atk)

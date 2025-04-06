@@ -7,7 +7,7 @@ signal damage_dealt(area, atk)
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 
-@export var atk: Attack
+@export var atk:= Attack.new(global_position)
 
 var attack_damage := 10
 
@@ -30,7 +30,7 @@ func _on_hitbox_component_area_exited(area: Area2D) -> void:
 func attack():
 	hitbox_component.disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE
 	sprite.play("default")
-	sprite.speed_scale = atk.atk_spd
+	sprite.speed_scale = atk.speed
 	hitbox_component.disable_mode = CollisionObject2D.DISABLE_MODE_KEEP_ACTIVE
 
 func flip_n_offset(bool_val: bool, x_offset: int):

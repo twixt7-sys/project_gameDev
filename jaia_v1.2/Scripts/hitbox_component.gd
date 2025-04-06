@@ -17,7 +17,7 @@ func take_damage(atk: Attack):
 		flag = false
 		if health_comp:
 			health_comp.damage(atk)
-			print("[hitbox]This entity is taking", atk.atk_dmg, " damage.")
+			print("[hitbox]This entity is taking", atk.damage, " damage.")
 
 func _on_timer_timeout() -> void:
 	flag = true
