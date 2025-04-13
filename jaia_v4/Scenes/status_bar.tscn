@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd85i02px3xbu"]
+
+[ext_resource type="Script" uid="uid://c2go8ssu81fls" path="res://Scripts/status_bar.gd" id="1_mux0b"]
+
+[node name="StatusBar" type="Node"]
+script = ExtResource("1_mux0b")
+
+[node name="HealthBar" type="ColorRect" parent="."]
+offset_left = -15.0
+offset_top = -22.0
+offset_right = 15.0
+offset_bottom = -20.0
+color = Color(0.6, 0.027451, 0.0156863, 0.705882)
+
+[node name="ManaBar" type="ColorRect" parent="."]
+offset_left = -15.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = -18.0
+color = Color(0.27451, 0.490196, 1, 0.705882)
+
+[node name="StaminaBar" type="ColorRect" parent="."]
+offset_left = -15.0
+offset_top = -18.0
+offset_right = 15.0
+offset_bottom = -17.0
+color = Color(1, 1, 0.160784, 0.705882)

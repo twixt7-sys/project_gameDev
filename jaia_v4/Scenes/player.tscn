@@ -1,0 +1,234 @@
+[gd_scene load_steps=36 format=3 uid="uid://c2567q5dk8s7m"]
+
+[ext_resource type="Script" uid="uid://1y3fg2bcj2fm" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://cckcnuyuhm87n" path="res://Assets/Entities/player.png" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://d3sdvmyd0t21j" path="res://Scenes/movement_component.tscn" id="3_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://uo6f85wp6o10" path="res://Scenes/attack.tscn" id="4_vgqql"]
+[ext_resource type="PackedScene" uid="uid://bd85i02px3xbu" path="res://Scenes/status_bar.tscn" id="5_fkybt"]
+[ext_resource type="PackedScene" uid="uid://ddxqpjweuq88f" path="res://Scenes/health_component.tscn" id="6_8erm5"]
+[ext_resource type="PackedScene" uid="uid://byovj7gc3hr7g" path="res://Scenes/mana_component.tscn" id="7_f1ek2"]
+[ext_resource type="PackedScene" uid="uid://bgo7kyb154ag3" path="res://Scenes/stamina_component.tscn" id="8_tx1dd"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_kelma"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_y8w33"]
+
+[sub_resource type="GDScript" id="GDScript_vgqql"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_xa75v"]
+script = SubResource("GDScript_vgqql")
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_58ae2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ivevv"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r6jsd"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p6qlh"]
+advance_mode = 2
+advance_condition = &"slash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2sw5t"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ij4jb"]
+advance_mode = 2
+advance_condition = &"slash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c68nv"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_c31lq"]
+states/End/position = Vector2(680, 49)
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_kelma")
+states/Idle/position = Vector2(263, 49)
+states/Slash/node = SubResource("AnimationNodeBlendSpace2D_y8w33")
+states/Slash/position = Vector2(397, 49)
+states/Start/position = Vector2(133, 49)
+states/Walk/node = SubResource("AnimationNodeBlendSpace2D_xa75v")
+states/Walk/position = Vector2(263, 141)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_58ae2"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ivevv"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_r6jsd"), "Idle", "Slash", SubResource("AnimationNodeStateMachineTransition_p6qlh"), "Slash", "Idle", SubResource("AnimationNodeStateMachineTransition_2sw5t"), "Walk", "Slash", SubResource("AnimationNodeStateMachineTransition_ij4jb"), "Slash", "Walk", SubResource("AnimationNodeStateMachineTransition_c68nv")]
+graph_offset = Vector2(-20, -20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4iuc"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3wgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gymyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu2lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukyrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd4e3")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkybt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3wgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3smsa")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8erm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ek2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+platform_wall_layers = 1
+script = ExtResource("1_cvnsp")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_c31lq")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/is_idle = false
+parameters/conditions/is_moving = false
+parameters/conditions/slash = false
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Slash/blend_position = Vector2(0, 0)
+parameters/Walk/blend_position = Vector2(0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x3wgy")
+animation = &"attack"
+autoplay = "idle"
+frame = 6
+frame_progress = 1.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="Movement Component" parent="." node_paths=PackedStringArray("STAMINA", "BODY", "SPRITE") instance=ExtResource("3_6t5aa")]
+STAMINA = NodePath("../Stamina Component")
+BODY = NodePath("..")
+SPRITE = NodePath("../AnimatedSprite2D")
+MOVEMENT_SPEED = 7.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cvnsp")
+
+[node name="Attack" parent="." instance=ExtResource("4_vgqql")]
+damage = 1.0
+speed = 1.0
+knockback = 1.0
+
+[node name="Health Component" parent="." instance=ExtResource("6_8erm5")]
+
+[node name="Mana Component" parent="." instance=ExtResource("7_f1ek2")]
+
+[node name="Stamina Component" parent="." instance=ExtResource("8_tx1dd")]
+
+[node name="StatusBar" parent="." node_paths=PackedStringArray("player", "sprite", "healthComponent", "manaComponent", "staminaComponent") instance=ExtResource("5_fkybt")]
+player = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+healthComponent = NodePath("../Health Component")
+manaComponent = NodePath("../Mana Component")
+staminaComponent = NodePath("../Stamina Component")
