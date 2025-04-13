@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://dy12sw0ubay0h"]
+
+[ext_resource type="Texture2D" uid="uid://bdqork24608p5" path="res://Assets/Effects/dust1.png" id="1_why1w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts161"]
+atlas = ExtResource("1_why1w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jme2a"]
+atlas = ExtResource("1_why1w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy3h8"]
+atlas = ExtResource("1_why1w")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xv1wt"]
+atlas = ExtResource("1_why1w")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4jyb"]
+atlas = ExtResource("1_why1w")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge4kt"]
+atlas = ExtResource("1_why1w")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25ewe"]
+atlas = ExtResource("1_why1w")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woo0b"]
+atlas = ExtResource("1_why1w")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yalkc"]
+atlas = ExtResource("1_why1w")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qbd1i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ts161")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jme2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy3h8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xv1wt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4jyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge4kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25ewe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woo0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yalkc")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Dust" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_qbd1i")
+frame = 10
+frame_progress = 1.0

@@ -4,3 +4,14 @@
 
 [node name="Movement Component" type="Node2D"]
 script = ExtResource("1_ptdap")
+
+[node name="DashCD" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="StaminaCD" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="DashCD" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="StaminaCD" to="." method="_on_stamina_cd_timeout"]

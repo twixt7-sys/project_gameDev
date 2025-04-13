@@ -20,7 +20,6 @@ func attack(callable: Callable):
 	if can_attack:
 		can_attack = false
 		callable.call()
-		print("Entity attacked.")
 		timer.start()
 
 func _on_timer_timeout() -> void:
