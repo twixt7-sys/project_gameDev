@@ -27,14 +27,14 @@ func move(delta: float, direction: Vector2, run: bool) -> void:
 	
 	if STAMINA and run and direction != V_zero:
 		if not run_on_cooldown:
-			STAMINA.consume(1.2)
+			STAMINA.consume(0.35)
 
 func dash():
-	if STAMINA.stamina > 15:
-		STAMINA.stamina -= 15
+	if STAMINA.stamina > 4:
+		STAMINA.stamina -= 4
 		BODY.velocity *= (Vector2(1, 1) * BACKSTEP_POWER)
 	
 func backstep():
-	if STAMINA.stamina > 15:
-		STAMINA.stamina -= 15
+	if STAMINA.stamina > 4:
+		STAMINA.stamina -= 4
 		BODY.velocity *= -(Vector2(1, 1) * BACKSTEP_POWER)

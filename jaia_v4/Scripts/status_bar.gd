@@ -2,7 +2,7 @@ class_name StatusBar
 extends Node
 
 @export var player: Player
-@export var sprite: AnimatedSprite2D
+@onready var sprite: Sprite2D = $"../Animation/Player"
 
 @export var healthComponent: HealthComponent
 @export var manaComponent: ManaComponent
@@ -18,7 +18,7 @@ const BAR_HEIGHT = 2.0
 
 
 func _process(delta: float) -> void:
-	var BAR_WIDTH = sprite.sprite_frames.get_frame_texture("idle", 0).get_size().x * sprite.scale.x / 3.5
+	var BAR_WIDTH = sprite.get_rect().size.x * sprite.scale.x / 3.5
 	if healthComponent and manaComponent and staminaComponent:
 		health_bar.size = Vector2((healthComponent.health / MAX_VALUE) * BAR_WIDTH, BAR_HEIGHT)
 		mana_bar.size = Vector2((manaComponent.mana / MAX_VALUE) * BAR_WIDTH, BAR_HEIGHT)

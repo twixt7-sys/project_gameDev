@@ -1,11 +1,12 @@
 class_name Player
 extends CharacterBody2D
 
-@onready var animation_tree: AnimationTree = $AnimationTree
-@onready var movement: MovementComponent = $"Movement Component"
-@onready var atk: Attack = $Attack
-@onready var action: Action = $Action
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var STAMINA: StaminaComponent = $"Components/Stamina Component"
+@onready var movement: MovementComponent = $"Components/Movement Component"
+@onready var atk: Attack = $"Components/Attack Component"
+@onready var action: Action = $"Components/Action Component"
+@onready var animation_tree: AnimationTree = $Animation/AnimationTree
+@onready var animation_player: AnimationPlayer = $Animation/AnimationPlayer
 
 var dir: Vector2 = Vector2.ZERO
 
@@ -32,6 +33,9 @@ func attack(cond: bool):
 	var on_start = func():
 		print("Player Attacked.")
 		atk.origin = global_position
+		movement.dash()
+		if STAMINA.stamina > 8:
+			STAMINA.stamina -= 8
 	action.action("attack", 0.5, true, on_start)
 
 func roll(cond: bool):
@@ -57,25 +61,28 @@ func backstep(cond: bool):
 	action.action("backstep", 0.5, true, on_start, on_end)
 
 func update_animation_parameters():
+	var is_attacking = Input.is_action_just_pressed("slash")
+	var is_rolling = Input.is_action_just_pressed("roll")
+	var backstep = Input.is_action_just_pressed("backstep")
 
-	animation_tree["parameters/conditions/attack"] = true if Input.is_action_just_pressed("slash") else false
-	animation_tree["parameters/conditions/is_rolling"] = true if Input.is_action_pressed("roll") else false
+	# Prioritize input
+	animation_tree["parameters/conditions/backstep"] = backstep
+	animation_tree["parameters/conditions/attack"] = is_attacking and not backstep
+	animation_tree["parameters/conditions/is_rolling"] = is_rolling and not is_attacking and not backstep
 
-	if animation_tree["parameters/conditions/is_rolling"]:
-		return
-
-	if Input.is_action_pressed("sprint") and velocity != Vector2.ZERO:
-		animation_tree["parameters/conditions/is_running"] = true
-		animation_tree["parameters/conditions/is_moving"] = false
-		animation_tree["parameters/conditions/idle"] = false
-	elif velocity != Vector2.ZERO:
-		animation_tree["parameters/conditions/is_running"] = false
-		animation_tree["parameters/conditions/is_moving"] = true
-		animation_tree["parameters/conditions/idle"] = false
+	if is_attacking or is_rolling or backstep:
+		for cond in ["is_running", "is_moving", "idle"]:
+			animation_tree["parameters/conditions/%s" % cond] = false
 	else:
-		animation_tree["parameters/conditions/is_running"] = false
-		animation_tree["parameters/conditions/is_moving"] = false
-		animation_tree["parameters/conditions/idle"] = true
-
-	if dir != Vector2.ZERO: for x in ["idle", "walk", "run", "roll/BlendSpace2D"]:
-		animation_tree["parameters/%s/blend_position" % x] = dir
+		var velocity_threshold = 3
+		var moving = velocity.length() >= velocity_threshold
+		var sprinting = Input.is_action_pressed("sprint") and moving
+		animation_tree["parameters/conditions/is_running"] = sprinting
+		animation_tree["parameters/conditions/is_moving"] = moving and not sprinting
+		animation_tree["parameters/conditions/idle"] = velocity.length() < velocity_threshold
+	
+	STAMINA.REGEN = 0.75 if velocity.length() < 3 else 0.25
+	
+	if dir != Vector2.ZERO:
+		for x in ["idle", "walk", "run", "roll/BlendSpace2D", "attack/BlendSpace2D", "backstep/BlendSpace2D"]:
+			animation_tree["parameters/%s/blend_position" % x] = dir
