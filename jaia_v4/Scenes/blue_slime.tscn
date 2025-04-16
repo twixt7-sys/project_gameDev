@@ -128,9 +128,8 @@ frame_progress = 0.294583
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PatrolArea"]
 shape = SubResource("CircleShape2D_032yx")
 
-[node name="Movement Component" parent="." node_paths=PackedStringArray("BODY", "SPRITE") instance=ExtResource("3_032yx")]
+[node name="Movement Component" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("3_032yx")]
 BODY = NodePath("..")
-SPRITE = NodePath("../AnimatedSprite2D")
 MOVEMENT_SPEED = 1.0
 FRICTION = 0.95
 
