@@ -1,0 +1,291 @@
+[gd_scene load_steps=36 format=3 uid="uid://c2567q5dk8s7m"]
+
+[ext_resource type="Script" uid="uid://1y3fg2bcj2fm" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://cckcnuyuhm87n" path="res://Assets/Entities/player.png" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://d3sdvmyd0t21j" path="res://Scenes/movement_component.tscn" id="3_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://uo6f85wp6o10" path="res://Scenes/attack.tscn" id="4_vgqql"]
+[ext_resource type="PackedScene" uid="uid://bd85i02px3xbu" path="res://Scenes/status_bar.tscn" id="5_fkybt"]
+[ext_resource type="PackedScene" uid="uid://ddxqpjweuq88f" path="res://Scenes/health_component.tscn" id="6_8erm5"]
+[ext_resource type="PackedScene" uid="uid://byovj7gc3hr7g" path="res://Scenes/mana_component.tscn" id="7_f1ek2"]
+[ext_resource type="PackedScene" uid="uid://bgo7kyb154ag3" path="res://Scenes/stamina_component.tscn" id="8_tx1dd"]
+[ext_resource type="PackedScene" uid="uid://bjyw372aqpi18" path="res://Scenes/action.tscn" id="9_f1ek2"]
+[ext_resource type="Script" uid="uid://d3xrckj8gvwwx" path="res://Scripts/animation_machine.gd" id="10_tx1dd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4iuc"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs7ks"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6n3p"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olqyp"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi64h"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ijsl"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1odr"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(256, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3wgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gymyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu2lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukyrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd4e3")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkybt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqcod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igrcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs7ks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6n3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olqyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpjfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi64h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ijsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1odr")
+}],
+"loop": false,
+"name": &"roll",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3wgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3smsa")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8erm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ek2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_gymyn"]
+script/source = "class_name AnimationStateMachine
+extends Node2D
+
+@export var sprite: AnimatedSprite2D
+
+var states = {}
+var current_state: String = \"\"
+var playing: bool = false
+
+# Add a state dynamically
+func add_state(state_name: String, animation: String, condition: Callable = func(): return true, on_end: Callable = func(): null):
+	states[state_name] = {
+		\"animation\": animation,
+		\"condition\": condition,
+		\"on_end\": on_end
+	}
+
+# Tries to play the state if not already playing or if condition fails
+func play_state(state_name: String):
+	if current_state == state_name or not states.has(state_name): return
+	var state = states[state_name]
+	if not state[\"condition\"].call(): return
+
+	current_state = state_name
+	sprite.play(state[\"animation\"])
+	playing = true
+
+# Call this in _process or _physics_process
+func update():
+	if not playing: return
+	if not sprite.is_playing():
+		playing = false
+		if states.has(current_state):
+			states[current_state][\"on_end\"].call()
+		current_state = \"\"
+
+# Optional force stop
+func stop():
+	sprite.stop()
+	playing = false
+	current_state = \"\"
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+platform_wall_layers = 1
+script = ExtResource("1_cvnsp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x3wgy")
+animation = &"walk"
+autoplay = "idle"
+script = SubResource("GDScript_gymyn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="Movement Component" parent="." node_paths=PackedStringArray("STAMINA", "BODY", "SPRITE") instance=ExtResource("3_6t5aa")]
+STAMINA = NodePath("../Stamina Component")
+BODY = NodePath("..")
+SPRITE = NodePath("../AnimatedSprite2D")
+MOVEMENT_SPEED = 7.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cvnsp")
+
+[node name="Attack" parent="." instance=ExtResource("4_vgqql")]
+damage = 1.0
+speed = 1.0
+knockback = 1.0
+
+[node name="Health Component" parent="." instance=ExtResource("6_8erm5")]
+
+[node name="Mana Component" parent="." instance=ExtResource("7_f1ek2")]
+
+[node name="Stamina Component" parent="." instance=ExtResource("8_tx1dd")]
+
+[node name="StatusBar" parent="." node_paths=PackedStringArray("player", "sprite", "healthComponent", "manaComponent", "staminaComponent") instance=ExtResource("5_fkybt")]
+player = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+healthComponent = NodePath("../Health Component")
+manaComponent = NodePath("../Mana Component")
+staminaComponent = NodePath("../Stamina Component")
+
+[node name="Action" parent="." node_paths=PackedStringArray("player", "sprite") instance=ExtResource("9_f1ek2")]
+player = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="Animation" type="Node2D" parent="."]
+script = ExtResource("10_tx1dd")

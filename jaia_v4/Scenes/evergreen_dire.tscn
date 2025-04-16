@@ -55,7 +55,7 @@ scale = Vector2(2, 2)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vedrj")
 autoplay = "default"
-frame_progress = 0.591309
+frame_progress = 0.437715
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
