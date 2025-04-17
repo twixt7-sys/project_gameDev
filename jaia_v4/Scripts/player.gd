@@ -5,8 +5,8 @@ extends CharacterBody2D
 @onready var movement: MovementComponent = $"Components/Movement Component"
 @onready var atk: Attack = $"Components/Attack Component"
 @onready var action: Action = $"Components/Action Component"
-@onready var animation_tree: AnimationTree = $Animation/AnimationTree
-@onready var animation_player: AnimationPlayer = $Animation/AnimationPlayer
+@onready var animation_tree: AnimationTree = $Animation/PlayerAnim
+@onready var animation_player: AnimationPlayer = $Animation/PlayerAP
 
 var dir: Vector2 = Vector2.ZERO
 

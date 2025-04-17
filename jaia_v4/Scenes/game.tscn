@@ -67,6 +67,9 @@ position = Vector2(475, 88)
 [node name="Evergreen Dire" parent="." instance=ExtResource("6_i6g32")]
 position = Vector2(43, -209)
 
+[node name="Blue Slime" parent="." instance=ExtResource("4_wowpa")]
+position = Vector2(143, -419)
+
 [connection signal="patrol_area_entered" from="Entities/Blue Slime" to="." method="_on_blue_slime_patrol_area_entered"]
 [connection signal="patrol_area_exited" from="Entities/Blue Slime" to="." method="_on_patrol_area_exited"]
 [connection signal="patrol_area_entered" from="Entities/Blue Slime2" to="." method="_on_blue_slime_patrol_area_entered"]
