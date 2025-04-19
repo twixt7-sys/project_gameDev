@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://5ndb27nh3m6n"]
+
+[ext_resource type="Texture2D" uid="uid://c8mxf1yba6ksp" path="res://Assets/leigh.png" id="1_fa7en"]
+[ext_resource type="FontFile" uid="uid://bewp2mh0kpltv" path="res://Assets/Fonts/PixelOperator8.ttf" id="2_yfkgj"]
+[ext_resource type="FontFile" uid="uid://bsuhtppl0kvcd" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="3_pv1ew"]
+[ext_resource type="Texture2D" uid="uid://4kw5xv7m51l8" path="res://Assets/Effects/shadow.png" id="4_pv1ew"]
+
+[sub_resource type="Animation" id="Animation_5fn3h"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_yfkgj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pv1ew"]
+_data = {
+&"RESET": SubResource("Animation_yfkgj"),
+&"idle": SubResource("Animation_5fn3h")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pv1ew"]
+
+[node name="Leigh" type="StaticBody2D"]
+
+[node name="Leigh" type="Sprite2D" parent="."]
+texture = ExtResource("1_fa7en")
+hframes = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -8.0
+offset_top = -22.0
+offset_right = 59.0
+offset_bottom = -6.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/normal_font = ExtResource("2_yfkgj")
+theme_override_fonts/bold_font = ExtResource("3_pv1ew")
+bbcode_enabled = true
+text = "Leigh"
+horizontal_alignment = 1
+structured_text_bidi_override = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Leigh")
+libraries = {
+&"": SubResource("AnimationLibrary_pv1ew")
+}
+autoplay = "idle"
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+position = Vector2(1, 15)
+scale = Vector2(0.640625, 0.84375)
+texture = ExtResource("4_pv1ew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_pv1ew")

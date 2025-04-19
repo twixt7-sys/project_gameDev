@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://bxd1le34egkfo"]
+[gd_scene load_steps=20 format=3 uid="uid://bxd1le34egkfo"]
 
 [ext_resource type="Script" uid="uid://bb7nfcj2fecqw" path="res://Scripts/blue_slime.gd" id="1_g1x46"]
 [ext_resource type="Texture2D" uid="uid://cu307r3gb6lon" path="res://Assets/Entities/slime.png" id="2_y8sgr"]
 [ext_resource type="PackedScene" uid="uid://d3sdvmyd0t21j" path="res://Scenes/movement_component.tscn" id="3_032yx"]
+[ext_resource type="Texture2D" uid="uid://4kw5xv7m51l8" path="res://Assets/Effects/shadow.png" id="4_15glr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_032yx"]
 atlas = ExtResource("2_y8sgr")
@@ -126,6 +127,7 @@ frame_progress = 0.294583
 [node name="PatrolArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PatrolArea"]
+visible = false
 shape = SubResource("CircleShape2D_032yx")
 
 [node name="Movement Component" parent="." node_paths=PackedStringArray("BODY") instance=ExtResource("3_032yx")]
@@ -134,9 +136,17 @@ MOVEMENT_SPEED = 1.0
 FRICTION = 0.95
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_e7rq5")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+position = Vector2(0.500002, 7)
+scale = Vector2(0.84375, 0.84375)
+texture = ExtResource("4_15glr")
 
 [connection signal="body_entered" from="PatrolArea" to="." method="_on_patrol_area_body_entered"]
 [connection signal="body_exited" from="PatrolArea" to="." method="_on_patrol_area_body_exited"]

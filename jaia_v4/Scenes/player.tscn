@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://c2567q5dk8s7m"]
+[gd_scene load_steps=86 format=3 uid="uid://c2567q5dk8s7m"]
 
 [ext_resource type="Script" uid="uid://1y3fg2bcj2fm" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cckcnuyuhm87n" path="res://Assets/Entities/player.png" id="2_6t5aa"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://ber3gxe0i2n7r" path="res://Assets/Effects/slash.png" id="10_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://bdqork24608p5" path="res://Assets/Effects/dust1.png" id="11_gymyn"]
 [ext_resource type="Texture2D" uid="uid://cejeaipd4lxjp" path="res://Assets/Effects/fire_circle.png" id="12_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://4kw5xv7m51l8" path="res://Assets/Effects/shadow.png" id="13_ukyrk"]
+[ext_resource type="FontFile" uid="uid://bewp2mh0kpltv" path="res://Assets/Fonts/PixelOperator8.ttf" id="14_h4iuc"]
+[ext_resource type="FontFile" uid="uid://bsuhtppl0kvcd" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="15_fd4e3"]
 
 [sub_resource type="Animation" id="Animation_gymyn"]
 length = 0.001
@@ -877,7 +880,7 @@ parameters/conditions/is_moving = false
 parameters/conditions/is_rolling = false
 parameters/conditions/is_running = false
 parameters/attack/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/attack/TimeScale/scale = 2.0
+parameters/attack/TimeScale/scale = 3.0
 parameters/backstep/BlendSpace2D/blend_position = Vector2(0, 0)
 parameters/backstep/TimeScale/scale = 3.0
 parameters/idle/blend_position = Vector2(0.0031898, 0.021978)
@@ -893,10 +896,9 @@ texture = ExtResource("10_tx1dd")
 hframes = 7
 
 [node name="Dust" type="Sprite2D" parent="Animation"]
-position = Vector2(20, 9)
+visible = false
 texture = ExtResource("11_gymyn")
 hframes = 9
-frame = 8
 
 [node name="MagicAnim" type="AnimationTree" parent="Animation"]
 
@@ -906,9 +908,25 @@ texture = ExtResource("12_pu2lt")
 
 [node name="MagicAP" type="AnimationPlayer" parent="Animation"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_cvnsp")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+position = Vector2(0.53125, 14)
+scale = Vector2(0.658203, 0.84375)
+texture = ExtResource("13_ukyrk")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -8.0
+offset_top = -29.0
+offset_right = 59.0
+offset_bottom = -13.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/normal_font = ExtResource("14_h4iuc")
+theme_override_fonts/bold_font = ExtResource("15_fd4e3")
+bbcode_enabled = true
+text = "bloo"
+horizontal_alignment = 1
+structured_text_bidi_override = 6
