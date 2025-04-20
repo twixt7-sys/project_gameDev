@@ -47,6 +47,24 @@ tile_set = SubResource("TileSet_wowpa")
 [node name="Player" parent="Entities" instance=ExtResource("2_qxrlw")]
 disable_mode = 1
 
+[node name="Camera2D2" type="Camera2D" parent="Entities/Player"]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Entities/Player/Camera2D2"]
+z_index = 2
+position = Vector2(-240, -111)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_ldgsr")
+hframes = 9
+vframes = 5
+
+[node name="CharFrame" type="Sprite2D" parent="Entities/Player/Camera2D2"]
+z_index = 3
+position = Vector2(-241, -116)
+scale = Vector2(2, 2)
+texture = ExtResource("5_h4fw4")
+
 [node name="Blue Slime" parent="Entities" instance=ExtResource("4_wowpa")]
 position = Vector2(-390, 278)
 
@@ -68,10 +86,6 @@ position = Vector2(258, 412)
 [node name="Blue Slime7" parent="Entities" instance=ExtResource("4_wowpa")]
 position = Vector2(475, 88)
 
-[node name="Camera2D2" type="Camera2D" parent="Entities"]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-
 [node name="Evergreen Dire" parent="." instance=ExtResource("6_i6g32")]
 position = Vector2(43, -209)
 
@@ -81,44 +95,6 @@ position = Vector2(143, -419)
 [node name="Leigh" parent="." instance=ExtResource("7_1l0tm")]
 position = Vector2(-331, -1)
 scale = Vector2(1.1, 1.1)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-
-[node name="GUI2" type="MarginContainer" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Bars" type="HBoxContainer" parent="CanvasLayer/Control/GUI2"]
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control/GUI2/Bars"]
-z_index = 2
-use_parent_material = true
-position = Vector2(-240, -111)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("6_ldgsr")
-hframes = 9
-vframes = 5
-
-[node name="CharFrame" type="Sprite2D" parent="CanvasLayer/Control/GUI2/Bars"]
-z_index = 3
-use_parent_material = true
-position = Vector2(-241, -116)
-scale = Vector2(2, 2)
-texture = ExtResource("5_h4fw4")
 
 [connection signal="patrol_area_entered" from="Entities/Blue Slime" to="." method="_on_blue_slime_patrol_area_entered"]
 [connection signal="patrol_area_exited" from="Entities/Blue Slime" to="." method="_on_patrol_area_exited"]

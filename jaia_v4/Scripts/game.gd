@@ -2,8 +2,8 @@ extends Node
 
 @onready var player: Player = $Entities/Player
 @onready var slimes: Array = []
-@onready var camera: Camera2D = $Entities/Camera2D2
 @onready var gui: Control = $ControlParent/GUI
+@onready var camera: Camera2D = $Entities/Player/Camera2D2
 
 func _ready() -> void:
 	for entity in $Entities.get_children():
