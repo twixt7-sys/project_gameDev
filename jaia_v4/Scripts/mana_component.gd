@@ -6,10 +6,8 @@ extends Node2D
 
 var mana: int
 
-
 func _ready() -> void:
 	mana = MAX_MANA
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

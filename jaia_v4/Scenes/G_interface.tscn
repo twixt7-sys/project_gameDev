@@ -1,0 +1,133 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2ew7sgun0av2"]
+
+[ext_resource type="Script" uid="uid://msn0hhj7gvnv" path="res://Scripts/game_interface.gd" id="1_ud0rk"]
+[ext_resource type="FontFile" uid="uid://bewp2mh0kpltv" path="res://Assets/Fonts/PixelOperator8.ttf" id="2_2lbgj"]
+[ext_resource type="FontFile" uid="uid://bsuhtppl0kvcd" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="3_dma3w"]
+[ext_resource type="Texture2D" uid="uid://b44lotw3htsqu" path="res://Assets/UI/CharacterFrame.png" id="4_nvyho"]
+[ext_resource type="Texture2D" uid="uid://cckcnuyuhm87n" path="res://Assets/Entities/player.png" id="5_jva40"]
+[ext_resource type="PackedScene" uid="uid://c2567q5dk8s7m" path="res://Scenes/player.tscn" id="6_4by4y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4fw4"]
+atlas = ExtResource("5_jva40")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldgsr"]
+atlas = ExtResource("5_jva40")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o5yvi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4fw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldgsr")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 1.0
+}]
+
+[node name="GI" type="Control"]
+layout_mode = 3
+anchor_top = 0.476563
+anchor_right = 0.005
+anchor_bottom = 0.476563
+offset_top = -46.0
+offset_right = 517.0
+offset_bottom = 41.0
+grow_vertical = 2
+script = ExtResource("1_ud0rk")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.207977
+anchor_top = 0.244286
+anchor_right = 0.208473
+anchor_bottom = 0.244286
+offset_left = 0.652
+offset_top = -7.32
+offset_right = 410.4
+offset_bottom = 52.68
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/normal_font = ExtResource("2_2lbgj")
+theme_override_fonts/bold_font = ExtResource("3_dma3w")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "bloo"
+scroll_active = false
+structured_text_bidi_override = 6
+
+[node name="ManaBar" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.176923
+anchor_top = 0.595238
+anchor_right = 0.780769
+anchor_bottom = 0.761905
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.27451, 0.490196, 1, 1)
+metadata/_edit_use_anchors_ = true
+metadata/max_size = 402.0
+
+[node name="HealthBar" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.184615
+anchor_top = 0.404762
+anchor_right = 0.782692
+anchor_bottom = 0.570961
+offset_bottom = 0.0392551
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6, 0.027451, 0.0156863, 1)
+metadata/_edit_use_anchors_ = true
+metadata/max_size = 400.0
+
+[node name="StaminaBar" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.163462
+anchor_top = 0.785714
+anchor_right = 0.780769
+anchor_bottom = 0.857143
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.160784, 1)
+metadata/_edit_use_anchors_ = true
+metadata/max_size = 408.0
+
+[node name="Node2D" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 0.5
+anchor_right = 0.294
+anchor_bottom = 1.262
+offset_right = -152.88
+offset_bottom = -64.008
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="CharFrame" type="Sprite2D" parent="Node2D"]
+z_index = 3
+position = Vector2(34.9707, -2.944)
+scale = Vector2(2, 2)
+texture = ExtResource("4_nvyho")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(35.1928, 4.61161)
+scale = Vector2(1.4, 1.4)
+sprite_frames = SubResource("SpriteFrames_o5yvi")
+animation = &"IDLE"
+autoplay = "IDLE"
+frame_progress = 0.422881
+
+[node name="Player" parent="Node2D" instance=ExtResource("6_4by4y")]
+visible = false

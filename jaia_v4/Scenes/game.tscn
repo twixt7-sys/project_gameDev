@@ -1,14 +1,13 @@
-[gd_scene load_steps=16 format=4 uid="uid://b5g7h683yls2b"]
+[gd_scene load_steps=12 format=4 uid="uid://b5g7h683yls2b"]
 
 [ext_resource type="Script" uid="uid://dga6qx6g5haqf" path="res://Scripts/game.gd" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://c2567q5dk8s7m" path="res://Scenes/player.tscn" id="2_qxrlw"]
 [ext_resource type="Texture2D" uid="uid://00ogqs1n4qa3" path="res://Assets/Tiles/wall_tile.png" id="2_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://b28oqkwwttuae" path="res://Assets/Tiles/grass_tile.png" id="3_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bxd1le34egkfo" path="res://Scenes/blue_slime.tscn" id="4_wowpa"]
-[ext_resource type="Texture2D" uid="uid://b44lotw3htsqu" path="res://Assets/UI/CharacterFrame.png" id="5_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://duncwqbutktf7" path="res://Scenes/evergreen_dire.tscn" id="6_i6g32"]
-[ext_resource type="Texture2D" uid="uid://cckcnuyuhm87n" path="res://Assets/Entities/player.png" id="6_ldgsr"]
 [ext_resource type="PackedScene" uid="uid://5ndb27nh3m6n" path="res://Scenes/leigh.tscn" id="7_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://d2ew7sgun0av2" path="res://Scenes/G_interface.tscn" id="8_v158k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dryh"]
 texture = ExtResource("2_wrm1d")
@@ -29,28 +28,6 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_3dryh")
 sources/1 = SubResource("TileSetAtlasSource_wowpa")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h4fw4"]
-atlas = ExtResource("6_ldgsr")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ldgsr"]
-atlas = ExtResource("6_ldgsr")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_o5yvi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h4fw4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ldgsr")
-}],
-"loop": true,
-"name": &"IDLE",
-"speed": 1.0
-}]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ebmjs")
@@ -109,23 +86,18 @@ scale = Vector2(1.1, 1.1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Control"]
-layout_mode = 1
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 6.975
 offset_left = 20.0
 offset_top = 15.0
-offset_right = 620.0
+offset_right = -7215.2
 offset_bottom = 143.0
-scale = Vector2(1.25, 1.25)
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Control/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
@@ -138,31 +110,7 @@ size = Vector2i(600, 128)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Node2D" type="Node2D" parent="CanvasLayer/Control/SubViewportContainer/SubViewport"]
-scale = Vector2(1.5, 1.5)
-
-[node name="CharFrame" type="Sprite2D" parent="CanvasLayer/Control/SubViewportContainer/SubViewport/Node2D"]
-z_index = 3
-position = Vector2(42.6667, 42)
-scale = Vector2(2, 2)
-texture = ExtResource("5_h4fw4")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control/SubViewportContainer/SubViewport/Node2D"]
-visible = false
-z_index = 2
-position = Vector2(41.6667, 49)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("6_ldgsr")
-hframes = 9
-vframes = 5
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/SubViewportContainer/SubViewport/Node2D"]
-position = Vector2(42.2222, 47.5556)
-scale = Vector2(1.5, 1.5)
-sprite_frames = SubResource("SpriteFrames_o5yvi")
-animation = &"IDLE"
-autoplay = "IDLE"
-frame_progress = 0.84763
+[node name="GI" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("8_v158k")]
 
 [connection signal="patrol_area_entered" from="Entities/Blue Slime" to="." method="_on_blue_slime_patrol_area_entered"]
 [connection signal="patrol_area_exited" from="Entities/Blue Slime" to="." method="_on_patrol_area_exited"]

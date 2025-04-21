@@ -827,11 +827,35 @@ motion_mode = 1
 platform_wall_layers = 1
 script = ExtResource("1_cvnsp")
 
-[node name="StatusBar" parent="." node_paths=PackedStringArray("player", "healthComponent", "manaComponent", "staminaComponent") instance=ExtResource("5_fkybt")]
-player = NodePath("..")
+[node name="StatusBar" parent="." node_paths=PackedStringArray("entity", "healthComponent", "manaComponent", "staminaComponent") instance=ExtResource("5_fkybt")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -23.0
+offset_right = 15.0
+offset_bottom = -17.0
+entity = NodePath("..")
 healthComponent = NodePath("../Components/Health Component")
 manaComponent = NodePath("../Components/Mana Component")
 staminaComponent = NodePath("../Components/Stamina Component")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -8.0
+offset_top = -22.0
+offset_right = 59.0
+offset_bottom = -6.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/normal_font = ExtResource("14_h4iuc")
+theme_override_fonts/bold_font = ExtResource("15_fd4e3")
+bbcode_enabled = true
+text = "bloo"
+horizontal_alignment = 1
+structured_text_bidi_override = 6
 
 [node name="Components" type="Node2D" parent="."]
 
@@ -917,16 +941,3 @@ z_index = -1
 position = Vector2(0.53125, 14)
 scale = Vector2(0.658203, 0.84375)
 texture = ExtResource("13_ukyrk")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -8.0
-offset_top = -29.0
-offset_right = 59.0
-offset_bottom = -13.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/normal_font = ExtResource("14_h4iuc")
-theme_override_fonts/bold_font = ExtResource("15_fd4e3")
-bbcode_enabled = true
-text = "bloo"
-horizontal_alignment = 1
-structured_text_bidi_override = 6
