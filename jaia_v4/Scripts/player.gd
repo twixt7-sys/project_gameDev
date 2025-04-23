@@ -12,6 +12,11 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $Animation/PlayerAnim
 @onready var animation_player: AnimationPlayer = $Animation/PlayerAP
 
+# temps
+@onready var text: Sprite2D = $Text
+@onready var content: RichTextLabel = $Text/textbox/content
+@onready var textbox: Control = $Text/textbox
+
 var dir: Vector2 = Vector2.ZERO
 
 func _ready() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://c2567q5dk8s7m"]
+[gd_scene load_steps=87 format=3 uid="uid://c2567q5dk8s7m"]
 
 [ext_resource type="Script" uid="uid://1y3fg2bcj2fm" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cckcnuyuhm87n" path="res://Assets/Entities/player.png" id="2_6t5aa"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://4kw5xv7m51l8" path="res://Assets/Effects/shadow.png" id="13_ukyrk"]
 [ext_resource type="FontFile" uid="uid://bewp2mh0kpltv" path="res://Assets/Fonts/PixelOperator8.ttf" id="14_h4iuc"]
 [ext_resource type="FontFile" uid="uid://bsuhtppl0kvcd" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="15_fd4e3"]
+[ext_resource type="Texture2D" uid="uid://cqt4bi4s4v0dp" path="res://Assets/textbox.png" id="16_fd4e3"]
 
 [sub_resource type="Animation" id="Animation_gymyn"]
 length = 0.001
@@ -924,13 +925,14 @@ visible = false
 texture = ExtResource("11_gymyn")
 hframes = 9
 
-[node name="MagicAnim" type="AnimationTree" parent="Animation"]
+[node name="Magic" type="Node2D" parent="Animation"]
 
-[node name="MagicCircle" type="Sprite2D" parent="Animation"]
+[node name="MagicCircle" type="Sprite2D" parent="Animation/Magic"]
 visible = false
 texture = ExtResource("12_pu2lt")
 
-[node name="MagicAP" type="AnimationPlayer" parent="Animation"]
+[node name="MagicAP" type="AnimationPlayer" parent="Animation/Magic"]
+root_node = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_cvnsp")
@@ -941,3 +943,45 @@ z_index = -1
 position = Vector2(0.53125, 14)
 scale = Vector2(0.658203, 0.84375)
 texture = ExtResource("13_ukyrk")
+
+[node name="Text" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(43, -25)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("16_fd4e3")
+
+[node name="textbox" type="Control" parent="Text"]
+layout_mode = 3
+anchor_left = 0.516
+anchor_top = 0.437
+anchor_right = 0.516
+anchor_bottom = 0.437
+offset_left = -27.512
+offset_top = -22.984
+offset_right = -4.512
+offset_bottom = -8.984
+
+[node name="content" type="RichTextLabel" parent="Text/textbox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.043
+anchor_top = -0.071
+anchor_right = 1.065
+anchor_bottom = 1.071
+offset_left = -12.6777
+offset_top = -8.006
+offset_right = 12.8383
+offset_bottom = 8.006
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(25, 16)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("15_fd4e3")
+theme_override_fonts/bold_font = ExtResource("15_fd4e3")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+structured_text_bidi_override = 6
+metadata/_edit_use_anchors_ = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://b5g7h683yls2b"]
+[gd_scene load_steps=20 format=4 uid="uid://b5g7h683yls2b"]
 
 [ext_resource type="Script" uid="uid://dga6qx6g5haqf" path="res://Scripts/game.gd" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://c2567q5dk8s7m" path="res://Scenes/player.tscn" id="2_qxrlw"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://duncwqbutktf7" path="res://Scenes/evergreen_dire.tscn" id="6_i6g32"]
 [ext_resource type="PackedScene" uid="uid://5ndb27nh3m6n" path="res://Scenes/leigh.tscn" id="7_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://d2ew7sgun0av2" path="res://Scenes/G_interface.tscn" id="8_v158k"]
+[ext_resource type="Texture2D" uid="uid://b6cxb2ktj4gmr" path="res://Assets/bday_cake.png" id="10_o5yvi"]
+[ext_resource type="Texture2D" uid="uid://t3ccl32aooke" path="res://Assets/ice_cream.png" id="11_rfjv2"]
+[ext_resource type="Texture2D" uid="uid://4kw5xv7m51l8" path="res://Assets/Effects/shadow.png" id="11_rku1e"]
+[ext_resource type="Texture2D" uid="uid://bte2x1wb7o3ds" path="res://Assets/flowers.png" id="12_1phco"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dryh"]
 texture = ExtResource("2_wrm1d")
@@ -28,6 +32,240 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_3dryh")
 sources/1 = SubResource("TileSetAtlasSource_wowpa")
+
+[sub_resource type="Animation" id="Animation_o5yvi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cakee/bd_cake/cake:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cakee/bd_cake:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cakee/bd_cake/cake:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cakee/bd_cake/Shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.125, 0.84375)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cakee/bd_cake/Shadow2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.610352, 0.765625)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cakee/bd_cake/Shadow3:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.1875, 0.84375)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cakee/bd_cake/ice_cream:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, -36)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cakee/bd_cake/flowers:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(26, 34)]
+}
+
+[sub_resource type="Animation" id="Animation_ldgsr"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cakee/bd_cake/cake:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cakee/bd_cake:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rku1e"]
+resource_name = "spawn"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cakee/bd_cake:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cakee/bd_cake/cake:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -30), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cakee/bd_cake/Shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.125, 0.84375)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cakee/bd_cake:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cakee/bd_cake/Shadow2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.610352, 0.765625)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cakee/bd_cake/Shadow3:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.1875, 0.84375)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cakee/bd_cake/ice_cream:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(25, -66), Vector2(25, -36)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cakee/bd_cake/flowers:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(26, 4), Vector2(26, 34)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rfjv2"]
+_data = {
+&"RESET": SubResource("Animation_o5yvi"),
+&"default": SubResource("Animation_ldgsr"),
+&"spawn": SubResource("Animation_rku1e")
+}
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ebmjs")
@@ -53,35 +291,14 @@ disable_mode = 1
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
-[node name="Blue Slime" parent="Entities" instance=ExtResource("4_wowpa")]
-position = Vector2(-390, 278)
-
-[node name="Blue Slime2" parent="Entities" instance=ExtResource("4_wowpa")]
-position = Vector2(-321, -221)
-
-[node name="Blue Slime3" parent="Entities" instance=ExtResource("4_wowpa")]
-position = Vector2(377, -189)
-
-[node name="Blue Slime4" parent="Entities" instance=ExtResource("4_wowpa")]
-position = Vector2(124, 184)
-
-[node name="Blue Slime5" parent="Entities" instance=ExtResource("4_wowpa")]
-position = Vector2(-74, 94)
-
-[node name="Blue Slime6" parent="Entities" instance=ExtResource("4_wowpa")]
-position = Vector2(258, 412)
-
-[node name="Blue Slime7" parent="Entities" instance=ExtResource("4_wowpa")]
-position = Vector2(475, 88)
-
 [node name="Evergreen Dire" parent="." instance=ExtResource("6_i6g32")]
-position = Vector2(326, -47)
+position = Vector2(336, -199)
 
 [node name="Blue Slime" parent="." instance=ExtResource("4_wowpa")]
-position = Vector2(426, -257)
+position = Vector2(724, -208)
 
 [node name="Leigh" parent="." instance=ExtResource("7_1l0tm")]
-position = Vector2(-48, 161)
+position = Vector2(-52, -3)
 scale = Vector2(1.1, 1.1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -111,12 +328,47 @@ size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="GI" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("8_v158k")]
+visible = false
 
-[connection signal="patrol_area_entered" from="Entities/Blue Slime" to="." method="_on_blue_slime_patrol_area_entered"]
-[connection signal="patrol_area_exited" from="Entities/Blue Slime" to="." method="_on_patrol_area_exited"]
-[connection signal="patrol_area_entered" from="Entities/Blue Slime2" to="." method="_on_blue_slime_patrol_area_entered"]
-[connection signal="patrol_area_entered" from="Entities/Blue Slime3" to="." method="_on_blue_slime_patrol_area_entered"]
-[connection signal="patrol_area_entered" from="Entities/Blue Slime4" to="." method="_on_blue_slime_patrol_area_entered"]
-[connection signal="patrol_area_entered" from="Entities/Blue Slime5" to="." method="_on_blue_slime_patrol_area_entered"]
-[connection signal="patrol_area_entered" from="Entities/Blue Slime6" to="." method="_on_blue_slime_patrol_area_entered"]
-[connection signal="patrol_area_entered" from="Entities/Blue Slime7" to="." method="_on_blue_slime_patrol_area_entered"]
+[node name="Cakee" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rfjv2")
+}
+
+[node name="bd_cake" type="Node2D" parent="Cakee"]
+visible = false
+position = Vector2(0, 5)
+
+[node name="cake" type="Sprite2D" parent="Cakee/bd_cake"]
+texture = ExtResource("10_o5yvi")
+hframes = 2
+frame = 1
+
+[node name="Shadow" type="Sprite2D" parent="Cakee/bd_cake"]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+position = Vector2(0, 10)
+scale = Vector2(1.125, 0.84375)
+texture = ExtResource("11_rku1e")
+
+[node name="ice_cream" type="Sprite2D" parent="Cakee/bd_cake"]
+position = Vector2(25, -36)
+texture = ExtResource("11_rfjv2")
+
+[node name="Shadow2" type="Sprite2D" parent="Cakee/bd_cake"]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+position = Vector2(24.7656, -18.75)
+scale = Vector2(0.610352, 0.765625)
+texture = ExtResource("11_rku1e")
+
+[node name="flowers" type="Sprite2D" parent="Cakee/bd_cake"]
+position = Vector2(26, 34)
+texture = ExtResource("12_1phco")
+
+[node name="Shadow3" type="Sprite2D" parent="Cakee/bd_cake"]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+position = Vector2(26, 41)
+scale = Vector2(1.1875, 0.84375)
+texture = ExtResource("11_rku1e")

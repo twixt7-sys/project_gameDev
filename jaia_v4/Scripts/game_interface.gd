@@ -1,6 +1,6 @@
 class_name GameInterface
 
-extends Node
+extends Control
 
 @onready var player: Player = $Node2D/Player
 
@@ -13,7 +13,10 @@ const BAR_HEIGHT = 2.0
 var mana_width := 402.0
 var health_width := 400.0
 var stamina_width := 408.0
-	
+
+func _ready() -> void:
+	visible = true
+
 
 func _process(delta: float) -> void:
 	health_bar.size = Vector2((player.health_component.health / player.health_component.MAX_HEALTH) * mana_width, mana_bar.size.y)

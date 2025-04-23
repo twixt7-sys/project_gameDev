@@ -6,7 +6,7 @@ extends Node2D
 
 var cooldowns = {}
 
-func action(action_name: String, cooldown: float,	cond: bool, logic: Callable, at_end := func(): null):
+func action(action_name: String, cooldown: float,	cond: bool, logic: Callable, at_end = func(): null):
 	if is_on_cooldown(action_name) or not cond: return func(): print(action_name, " failed.")
 	logic.call()
 	start_cooldown(action_name, cooldown, at_end)
