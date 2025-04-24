@@ -2,17 +2,22 @@ class_name BlueSlime
 
 extends CharacterBody2D
 
+signal body_attacked(attacker, entity)
 signal patrol_area_entered(area, entity)
 signal patrol_area_exited(area, entity)
 
 @onready var patrol_area: Area2D = $PatrolArea
 @onready var movement_component: MovementComponent = $"Movement Component"
+@onready var hitbox_component: HitboxComponent = $"Hitbox Component"
+@onready var health_component: HealthComponent = $"Health Component"
 
 var is_chasing = false
 var is_patrolling = true
+var is_being_attacked = false
+var attacker
 
-func _physics_process(delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	if is_being_attacked: emit_signal("body_attacked", attacker, self)
 
 func patrol():
 	print("slime is patrolling.")
@@ -35,3 +40,15 @@ func _on_patrol_area_body_exited(body: Node2D) -> void:
 	is_patrolling = true
 	print(self.name, " stopped chase.")
 	emit_signal("patrol_area_exited", body, self)
+
+func take_damage(atk: Attack):
+	hitbox_component.take_damage(atk)
+
+
+func _on_hitbox_component_body_entered(attacker: Node2D) -> void:
+	is_being_attacked = true
+	attacker = attacker
+	
+func _on_hitbox_component_body_exited(attacker: Node2D) -> void:
+	is_being_attacked = false
+	attacker = attacker

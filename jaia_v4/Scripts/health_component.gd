@@ -11,3 +11,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	pass
+
+func take_damage(dmg: int) -> void:
+	if health - dmg >= 0:
+		health -= dmg
+	else:
+		health = 0
