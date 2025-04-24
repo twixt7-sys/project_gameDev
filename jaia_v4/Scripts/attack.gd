@@ -14,7 +14,7 @@ var animation_flag = true
 var origin: Vector2
 
 static func create(atk_origin: Vector2) -> Attack:
-	var atk: Attack = preload("res://Scenes/attack.tscn").instantiate()
+	var atk: Attack = preload("res://Scenes/Components/attack.tscn").instantiate()
 	atk.origin = atk_origin
 	return atk
 

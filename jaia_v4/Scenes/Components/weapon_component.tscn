@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxdmjl4nwac4e"]
+
+[ext_resource type="Script" uid="uid://boeujf2s3hoeq" path="res://weapon_component.gd" id="1_twiti"]
+
+[node name="Weapon Component" type="Node2D"]
+script = ExtResource("1_twiti")

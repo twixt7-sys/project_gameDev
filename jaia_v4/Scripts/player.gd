@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal attack_area_entered(enemy, attacker)
+
 #components
 @onready var stamina_component: StaminaComponent = $"Components/Stamina Component"
 @onready var movement_component: MovementComponent = $"Components/Movement Component"
@@ -90,3 +92,7 @@ func update_animation_parameters():
 	if dir != Vector2.ZERO:
 		for x in ["idle", "walk", "run", "roll/BlendSpace2D", "attack/BlendSpace2D", "backstep/BlendSpace2D"]:
 			animation_tree["parameters/%s/blend_position" % x] = dir
+
+
+func _on_attack_area_area_entered(enemy: BlueSlime) -> void:
+	emit_signal("attack_area_entered", enemy, self)

@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bsuhtppl0kvcd" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="3_dma3w"]
 [ext_resource type="Texture2D" uid="uid://b44lotw3htsqu" path="res://Assets/UI/CharacterFrame.png" id="4_nvyho"]
 [ext_resource type="Texture2D" uid="uid://cckcnuyuhm87n" path="res://Assets/Entities/player.png" id="5_jva40"]
-[ext_resource type="PackedScene" uid="uid://c2567q5dk8s7m" path="res://Scenes/player.tscn" id="6_4by4y"]
+[ext_resource type="PackedScene" uid="uid://c2567q5dk8s7m" path="res://Scenes/Entities/player.tscn" id="6_4by4y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4fw4"]
 atlas = ExtResource("5_jva40")

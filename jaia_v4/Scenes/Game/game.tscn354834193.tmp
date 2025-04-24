@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=4 uid="uid://b5g7h683yls2b"]
 
-[ext_resource type="Script" uid="uid://dga6qx6g5haqf" path="res://Scripts/game.gd" id="1_ebmjs"]
-[ext_resource type="PackedScene" uid="uid://c2567q5dk8s7m" path="res://Scenes/player.tscn" id="2_qxrlw"]
-[ext_resource type="Texture2D" uid="uid://00ogqs1n4qa3" path="res://Assets/Tiles/wall_tile.png" id="2_wrm1d"]
-[ext_resource type="Texture2D" uid="uid://b28oqkwwttuae" path="res://Assets/Tiles/grass_tile.png" id="3_3dryh"]
-[ext_resource type="PackedScene" uid="uid://bxd1le34egkfo" path="res://Scenes/blue_slime.tscn" id="4_wowpa"]
-[ext_resource type="PackedScene" uid="uid://duncwqbutktf7" path="res://Scenes/evergreen_dire.tscn" id="6_i6g32"]
-[ext_resource type="PackedScene" uid="uid://d2ew7sgun0av2" path="res://Scenes/G_interface.tscn" id="8_v158k"]
+[ext_resource type="Script" uid="uid://dga6qx6g5haqf" path="res://Scripts/game.gd" id="1_vifcx"]
+[ext_resource type="Texture2D" uid="uid://00ogqs1n4qa3" path="res://Assets/Tiles/wall_tile.png" id="2_xfil1"]
+[ext_resource type="Texture2D" uid="uid://b28oqkwwttuae" path="res://Assets/Tiles/grass_tile.png" id="3_huoen"]
+[ext_resource type="PackedScene" uid="uid://c2567q5dk8s7m" path="res://Scenes/Entities/player.tscn" id="4_7jvlm"]
+[ext_resource type="PackedScene" uid="uid://bxd1le34egkfo" path="res://Scenes/Entities/blue_slime.tscn" id="5_qtymf"]
+[ext_resource type="PackedScene" uid="uid://duncwqbutktf7" path="res://Scenes/Entities/evergreen_dire.tscn" id="6_ypmwd"]
+[ext_resource type="PackedScene" uid="uid://d2ew7sgun0av2" path="res://Scenes/Game/G_interface.tscn" id="7_oejk7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dryh"]
-texture = ExtResource("2_wrm1d")
+texture = ExtResource("2_xfil1")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -18,7 +18,7 @@ texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wowpa"]
-texture = ExtResource("3_3dryh")
+texture = ExtResource("3_huoen")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
@@ -29,7 +29,7 @@ sources/0 = SubResource("TileSetAtlasSource_3dryh")
 sources/1 = SubResource("TileSetAtlasSource_wowpa")
 
 [node name="Game" type="Node"]
-script = ExtResource("1_ebmjs")
+script = ExtResource("1_vifcx")
 
 [node name="World" type="Node2D" parent="."]
 position = Vector2(283, 162)
@@ -45,17 +45,17 @@ occlusion_enabled = false
 [node name="Entities" type="Node2D" parent="."]
 position = Vector2(283, 162)
 
-[node name="Player" parent="Entities" instance=ExtResource("2_qxrlw")]
+[node name="Player" parent="Entities" instance=ExtResource("4_7jvlm")]
 disable_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
-[node name="Blue Slime" parent="Entities" instance=ExtResource("4_wowpa")]
-position = Vector2(441, -370)
+[node name="Blue Slime" parent="Entities" instance=ExtResource("5_qtymf")]
+position = Vector2(182, 8)
 
-[node name="Evergreen Dire" parent="." instance=ExtResource("6_i6g32")]
+[node name="Evergreen Dire" parent="." instance=ExtResource("6_ypmwd")]
 position = Vector2(336, -199)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -84,7 +84,7 @@ size = Vector2i(600, 128)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="GI" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("8_v158k")]
+[node name="GI" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("7_oejk7")]
 visible = false
 
 [connection signal="body_attacked" from="Entities/Blue Slime" to="." method="_on_blue_slime_body_attacked"]

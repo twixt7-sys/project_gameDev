@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://88xvthfup3pr"]
 
-[ext_resource type="PackedScene" uid="uid://d2ew7sgun0av2" path="res://Scenes/G_interface.tscn" id="1_pcnj6"]
+[ext_resource type="PackedScene" uid="uid://d2ew7sgun0av2" path="res://Scenes/Game/G_interface.tscn" id="1_pcnj6"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 

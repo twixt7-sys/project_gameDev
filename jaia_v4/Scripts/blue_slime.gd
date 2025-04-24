@@ -43,12 +43,3 @@ func _on_patrol_area_body_exited(body: Node2D) -> void:
 
 func take_damage(atk: Attack):
 	hitbox_component.take_damage(atk)
-
-
-func _on_hitbox_component_body_entered(attacker: Node2D) -> void:
-	is_being_attacked = true
-	attacker = attacker
-	
-func _on_hitbox_component_body_exited(attacker: Node2D) -> void:
-	is_being_attacked = false
-	attacker = attacker
