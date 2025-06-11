@@ -55,9 +55,10 @@ position_smoothing_enabled = true
 [node name="Blue Slime" parent="Entities" instance=ExtResource("5_qtymf")]
 position = Vector2(182, 8)
 
-[node name="Evergreen Dire" parent="." instance=ExtResource("6_ypmwd")]
-position = Vector2(106, 152)
-scale = Vector2(-2, 2)
+[node name="Evergreen Dire" parent="Entities" instance=ExtResource("6_ypmwd")]
+position = Vector2(-177, -10)
+rotation = 3.14159
+scale = Vector2(2, -2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

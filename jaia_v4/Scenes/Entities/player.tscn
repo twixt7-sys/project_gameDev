@@ -1016,6 +1016,7 @@ process_mode = 3
 script = ExtResource("15_43gew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Animation/Slash/AttackArea"]
+visible = false
 position = Vector2(-17, 7)
 shape = SubResource("RectangleShape2D_pm2yg")
 

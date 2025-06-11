@@ -31,7 +31,6 @@ func _on_patrol_area_exited(player: Player, slime: BlueSlime):
 
 func _on_blue_slime_body_attacked(attacker: Variant, entity: Variant) -> void:
 	blueslime.take_damage(player.attack_component)
-	pass
 
 
 func _on_player_attack_area_entered(enemy: BlueSlime, attacker: Player) -> void:
