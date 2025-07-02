@@ -10,18 +10,28 @@
 
 <table>
 	<tr>
-		<th> Title: </th>
+		<th><strong> title: </strong></th>
+		<th><strong> genres: </strong></th>
+		<th><strong> synopsis: </strong></th>
+		<th><strong> platform: </strong></th>
+		<th><strong> audience: </strong></th>
+	</tr>
+	<tr>
+		<th> Just Another Indie Adventure! </th>
+		<th> Fantasy, Adventure, Survival </th>
+		<th> Slay. Grow. Venture. In a world where freedom meets vibrance. </th>
+		<th> </th>
+		<th> </th>
 	</tr>
 </table>
 
 <hr>
 
-### Just Another Indie Adventure!
-#Fantasy, Adventure, Survival
+#
 **Platform(s): Android**
 **Target Audience: ages 12 and up**  
 **Elevator Pitch:**
-*Slay. Grow. Venture. In a world where freedom meets vibrance.*
+**
 
 ---
 
