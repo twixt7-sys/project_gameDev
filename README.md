@@ -8,6 +8,12 @@
 
 ## 1. Game Overview
 
+<table>
+	<tr>
+		<th> Title: </th>
+	</tr>
+</table>
+
 <hr>
 
 ### Just Another Indie Adventure!
