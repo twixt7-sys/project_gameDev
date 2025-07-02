@@ -1,7 +1,10 @@
 <h1 align="center"> Project: JAIA </h1>
 ---
+
 *screenshots*
+
 ---
+
 ## 1. Game Overview
 ### Just Another Indie Adventure!
 #Fantasy, Adventure, Survival
