@@ -7,6 +7,9 @@
 ---
 
 ## 1. Game Overview
+
+<hr>
+
 ### Just Another Indie Adventure!
 #Fantasy, Adventure, Survival
 **Platform(s): Android**
