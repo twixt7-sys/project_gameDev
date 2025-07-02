@@ -1,7 +1,11 @@
+<h1 align="center"> Project: JAIA </h1>
+---
+*screenshots*
+---
 ## 1. Game Overview
-**Title: Just Another Indie Adventure!**  
-**Genre: Fantasy Adventure**  
-**Platform(s): Android**  
+### Just Another Indie Adventure!
+#Fantasy, Adventure, Survival
+**Platform(s): Android**
 **Target Audience: ages 12 and up**  
 **Elevator Pitch:**
 *Slay. Grow. Venture. In a world where freedom meets vibrance.*
@@ -11,12 +15,12 @@
 ## 2. Gameplay Mechanics
 
 ### Core Loop
-1. **Tutorial Phase**: Learn the core controls, combat system, and basic mechanics.
-2. **Starting Town**: Acts as the central hub. Players can buy gear, accept quests, and interact with NPCs.
-3. **Exploration Phase**: Navigate the open world map and access procedurally generated areas.
-4. **Combat & Gathering**: Engage in real-time combat, fight monsters, gather loot, and collect resources.
-5. **Return & Progress**: Go back to town to turn in quests, upgrade gear, unlock new locations, and train proficiencies.
-6. **Repeat Loop**: With every cycle, new quests, zones, abilities, and story fragments are unlocked.
+    1. **Tutorial Phase**: Learn the core controls, combat system, and basic mechanics.
+    2. **Starting Town**: Acts as the central hub. Players can buy gear, accept quests, and interact with NPCs.
+    3. **Exploration Phase**: Navigate the open world map and access procedurally generated areas.
+    4. **Combat & Gathering**: Engage in real-time combat, fight monsters, gather loot, and collect resources.
+    5. **Return & Progress**: Go back to town to turn in quests, upgrade gear, unlock new locations, and train proficiencies.
+    6. **Repeat Loop**: With every cycle, new quests, zones, abilities, and story fragments are unlocked.
 
 This loop encourages a mix of preparation, skill mastery, and gradual world progression.
 
